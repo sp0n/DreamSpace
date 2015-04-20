@@ -13,3 +13,9 @@ GET /getName controllers.Application.getNameAge()
 
 #Hello Test
 GET /helloWeb controllers.Application.helloWeb()
+
+
+POST /user controllers.Application.addUser()
+
+GET /newuser controllers.Application.newUserPage()
+

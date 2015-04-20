@@ -1,6 +1,18 @@
 .ui-page { 
 	background:  url("../images/Space_image.jpg");
     background-position:center center ;
-    background-attachment:scroll ;
+   	background-attachment:scroll ;
     background-size:100% 100% ;
 }
+ #content {
+	position: relative;
+	border: 1px solid black;
+	background-color: black;
+	padding: 2em;
+	margin: 0 auto;
+	height:100vh;
+	width: 900px;
+  	top: 0px;
+  	overflow: scroll;
+}
+

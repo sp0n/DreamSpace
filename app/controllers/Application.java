@@ -34,7 +34,6 @@ public class Application extends Controller {
 	public static Result newUserPage() {
 		return ok(NewUserPage.render());
 	}
-¨
 
 
 // Create user and send to database
@@ -82,35 +81,38 @@ public class Application extends Controller {
 
 	}
 
-	public static Result getNameAge() {
+	public static Result getUser() {
 
-		ObjectNode result = Json.newObject();
+		
 		Connection conn = null;
 		Statement stmt = null;
-
+		
+        User user = Form.form(User.class).bindFromRequest().get();
+        
+        String userUsername = user.username;
+		String userPassword = user.password;
+        
 		try {
 
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM test";
+			String sql = "SELECT `username`, `password` FROM `user` WHERE `username` = " + "`" + userUsername + "`";
 
 			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				// Retrieve by column name
-
-				String name = rs.getString("name");
-				int age = rs.getInt("age");
-				ObjectNode test = Json.newObject();
-				test.put("Name", name);
-				test.put("Age", age);
-
-				result.put(name, age);
-			}
+			    
+			String username = rs.getString("user");
+			String password = rs.getString("password");
+				
+				if (userUsername == username && userPassword == password){
+				    rs.close();
+				    return ok("You are logged in as " + userUsername);
+				}
+				
+			
 			rs.close();
-
-			return ok(result);
+        
+			return ok("You fucked up");
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			return internalServerError(se.toString());

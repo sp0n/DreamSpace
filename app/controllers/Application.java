@@ -34,6 +34,10 @@ public class Application extends Controller {
 	public static Result newUserPage() {
 		return ok(NewUserPage.render());
 	}
+	
+		public static Result loginUserPage() {
+		return ok(LoginUserPage.render());
+	}
 
 
 // Create user and send to database
@@ -97,22 +101,24 @@ public class Application extends Controller {
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String sql = "SELECT `username`, `password` FROM `user` WHERE `username` = " + "`" + userUsername + "`";
+			String sql = "SELECT * FROM `user` WHERE `username` = " + "'" + userUsername + "'";
 
 			ResultSet rs = stmt.executeQuery(sql);
-			    
-			String username = rs.getString("user");
+			
+			rs.next();
+			
+			String username = rs.getString("username");
 			String password = rs.getString("password");
 				
-				if (userUsername == username && userPassword == password){
+				if (userUsername.equals(username) && userPassword.equals(password)){
 				    rs.close();
 				    return ok("You are logged in as " + userUsername);
 				}
 				
 			
 			rs.close();
-        
-			return ok("You fucked up");
+			return ok("You are not logged in");
+			
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			return internalServerError(se.toString());

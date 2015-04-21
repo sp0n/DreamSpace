@@ -8,7 +8,6 @@
 	position: relative;
 	border: 1px solid black;
 	background-color: black;
-	padding: 2em;
 	margin: 0 auto;
 	height:100vh;
 	width: 900px;
@@ -17,4 +16,12 @@
   	overflow-x: hidden;
 
 }
+
+#header {
+    background-color:white;
+    text-align:center;
+    padding:5px;
+    position: relative;
+}
+
 

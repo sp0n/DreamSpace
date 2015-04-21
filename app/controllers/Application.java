@@ -36,12 +36,17 @@ public class Application extends Controller {
 	}
 	
 		public static Result loginUserPage() {
-		return ok(LoginUserPage.render());
+		return ok(LoginUserPage.render(""));
 	}
 
 
 // Create user and send to database
 	public static Result addUser() {
+	    
+	    if (Form.form(User.class).bindFromRequest().hasErrors()){
+		    return ok("Leave no form empty");
+		}
+	    
 		User user = Form.form(User.class).bindFromRequest().get();
 		ObjectNode result = Json.newObject();
 		Connection conn = null;
@@ -91,7 +96,13 @@ public class Application extends Controller {
 		Connection conn = null;
 		Statement stmt = null;
 		
-        User user = Form.form(User.class).bindFromRequest().get();
+		if (Form.form(User.class).bindFromRequest().hasErrors()){
+		    return ok(LoginUserPage.render("Leave no form empty"));
+		}
+		
+	    User user = Form.form(User.class).bindFromRequest().get();
+        
+        
         
         String userUsername = user.username;
 		String userPassword = user.password;
@@ -104,7 +115,7 @@ public class Application extends Controller {
 			String sql = "SELECT * FROM `user` WHERE `username` = " + "'" + userUsername + "'";
 
 			ResultSet rs = stmt.executeQuery(sql);
-			
+			if(rs.isBeforeFirst()){
 			rs.next();
 			
 			String username = rs.getString("username");
@@ -114,10 +125,10 @@ public class Application extends Controller {
 				    rs.close();
 				    return ok("You are logged in as " + userUsername);
 				}
-				
+			} 
 			
 			rs.close();
-			return ok("You are not logged in");
+			return ok(LoginUserPage.render("Wrong user/pass"));
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC

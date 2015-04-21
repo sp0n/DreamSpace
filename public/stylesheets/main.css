@@ -4,24 +4,48 @@
    	background-attachment:scroll ;
     background-size:100% 100% ;
 }
+
+
  #content {
 	position: relative;
 	border: 1px solid black;
 	background-color: black;
 	margin: 0 auto;
 	height:100vh;
-	width: 900px;
-  	top: 0px;
+	width: 950px;
+  	top: 30px;
   	overflow: scroll;
   	overflow-x: hidden;
 
 }
 
-#header {
+
+/*#header {
     background-color:white;
     text-align:center;
     padding:5px;
     position: relative;
+}*/
+
+
+
+.header-google a.ui-btn {
+    border: none;
+    background: orange;
+    text-shadow: none;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
 }
 
+.header-google .ui-btn-inner {
+    padding: 0;
+    height: 29px;
+    line-height: 29px;
+}
+
+.header-google a.ui-btn.ui-btn-active,
+.header-google a.ui-btn:hover{
+    color: #FFF;
+}
 

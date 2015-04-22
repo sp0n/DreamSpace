@@ -20,7 +20,7 @@
 }*/
 
 .ui-content {
-    padding: 0 !important; 
+    padding: 0; 
     position : absolute !important; 
     top : 150px !important;  
     right : 100px !important; 

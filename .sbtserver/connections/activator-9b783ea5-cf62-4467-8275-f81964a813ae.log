@@ -1,0 +1,9 @@
+New log file opened at Wed Apr 22 14:20:12 CEST 2015 by 5628@Sabina
+Sending msg to client activator-9b783ea5-cf62-4467-8275-f81964a813ae: DetachedLogEvent(LogMessage(debug,sbt server socket logs are in: C:\Users\Sabina\Documents\GitHub\DreamSpace\.sbtserver\connections\master.log))
+Sending msg to client activator-9b783ea5-cf62-4467-8275-f81964a813ae: DetachedLogEvent(LogMessage(debug,sbt client logs are in: C:\Users\Sabina\Documents\GitHub\DreamSpace\.sbtserver\connections\activator-9b783ea5-cf62-4467-8275-f81964a813ae.log))
+Sending msg to client activator-9b783ea5-cf62-4467-8275-f81964a813ae: DetachedLogEvent(LogMessage(debug,sbt general server logs are in: C:\Users\Sabina\Documents\GitHub\DreamSpace\.sbtserver\master.log))
+Reading next message from client.
+Client activator-9b783ea5-cf62-4467-8275-f81964a813ae EOF, shutting down.
+Stopping client.
+Dropping message (0,ReceivedResponse()) to dead client activator-9b783ea5-cf62-4467-8275-f81964a813ae
+Client activator-9b783ea5-cf62-4467-8275-f81964a813ae thread exiting.

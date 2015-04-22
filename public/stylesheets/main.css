@@ -1,14 +1,21 @@
  .ui-page { 
-	background:  url("../images/Space_image.jpg");
+/*	background:  url("../images/Space_image.jpg");
     background-position:center center ;
    	background-attachment:scroll ;
     background-size:100% 100% ;
-    height: 100%;
+    height: 100%;*/
+    background: black;
 
 }
 
+.fullscreen{
+    
+        max-height: 100%;
+        max-width: 100%;
 
-.ui-content {
+}
+
+/*.ui-content {
     padding: 0; 
     position : absolute; 
     top : 150px;  
@@ -17,7 +24,7 @@
     left : 7.5%; 
     background-color: black; 
   
-} 
+} */
 
 .header-google a.ui-btn {
     border: none;

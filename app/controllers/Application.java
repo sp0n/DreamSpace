@@ -19,6 +19,7 @@ import play.libs.Json;
 public class Application extends Controller {
 
 	public static Result index() {
+		
 		return ok(index.render("Website"));
 	}
 
@@ -90,6 +91,8 @@ public class Application extends Controller {
 
 	}
 
+	
+	// Method for user login. Requests database reply for entered username, reacts accordingly.
 	public static Result getUser() {
 
 		
@@ -123,6 +126,7 @@ public class Application extends Controller {
 				
 				if (userUsername.equals(username) && userPassword.equals(password)){
 				    rs.close();
+				    response().setCookie(username, "Session");
 				    return ok("You are logged in as " + userUsername);
 				}
 			} 

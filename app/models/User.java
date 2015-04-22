@@ -14,7 +14,7 @@ public class User extends Model{
 @Id @Constraints.Required
 public String username;
 
-@Constraints.Required
+@Constraints.Required 
 public String password;
 
 //public static Model.Finder<String, User> find = new Model.Finder<String, User>(String.class, User.class);

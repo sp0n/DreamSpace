@@ -33,19 +33,47 @@ public class Application extends Controller {
 	}
 
 	public static Result newUserPage() {
-		return ok(NewUserPage.render());
+	    String currentUser = session("connected");
+        if(currentUser != null) {
+             return ok(TestMainPage.render("You are already logged in as " + currentUser + " Please log out if you wish to create another account"));
+        } 
+	    
+		return ok(NewUserPage.render(""));
 	}
 	
-		public static Result loginUserPage() {
+	public static Result loginUserPage() {
+	    
+	    String currentUser = session("connected");
+        if(currentUser != null) {
+             return ok(TestMainPage.render("You are already logged in as " + currentUser));
+        } 
+	    
 		return ok(LoginUserPage.render(""));
 	}
+	
+	public static Result testMainPage() {
+	    String user = session("connected");
+        if(user != null) {
+             return ok(TestMainPage.render("You are logged in as " + user));
+        } else {
+        return unauthorized(LoginUserPage.render("You must login to access this page"));
+        }
+	}
+	
+	public static Result logout() {
+	    session().clear();
+		return redirect(routes.Application.loginUserPage());
+	}
+	
+	
+	
 
 
 // Create user and send to database
 	public static Result addUser() {
 	    
 	    if (Form.form(User.class).bindFromRequest().hasErrors()){
-		    return ok("Leave no form empty");
+		    return badRequest(NewUserPage.render("Leave no form empty"));
 		}
 	    
 		User user = Form.form(User.class).bindFromRequest().get();
@@ -54,6 +82,10 @@ public class Application extends Controller {
 		Statement stmt = null;
 		String userUsername = user.username;
 		String userPassword = user.password;
+		
+		if (userUsername.matches("^.*[^a-zA-Z0-9].*$")){
+		    return badRequest(NewUserPage.render("Please only use letters and numbers for the username"));
+		}
 
 		try {
 			conn = DB.getConnection();
@@ -62,12 +94,13 @@ public class Application extends Controller {
 			String insertIntoDatabase = "INSERT INTO user"
 					+ "(USERNAME, PASSWORD) " + "VALUES" + "(" + "'" +userUsername + "'" + "," + "'" + userPassword + "'" +")";
 			
-
+            
 			// execute insert SQL stetement
 			stmt.executeUpdate(insertIntoDatabase);
 
 			// user.save();
-			return redirect(routes.Application.newUserPage());
+			session("connected", userUsername);
+			return redirect(routes.Application.testMainPage());
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			return internalServerError(se.toString());
@@ -94,13 +127,14 @@ public class Application extends Controller {
 	
 	// Method for user login. Requests database reply for entered username, reacts accordingly.
 	public static Result getUser() {
-
+        
+       
 		
 		Connection conn = null;
 		Statement stmt = null;
 		
 		if (Form.form(User.class).bindFromRequest().hasErrors()){
-		    return ok(LoginUserPage.render("Leave no form empty"));
+		    return badRequest(LoginUserPage.render("Leave no form empty"));
 		}
 		
 	    User user = Form.form(User.class).bindFromRequest().get();
@@ -126,8 +160,8 @@ public class Application extends Controller {
 				
 				if (userUsername.equals(username) && userPassword.equals(password)){
 				    rs.close();
-				    response().setCookie(username, "Session");
-				    return ok("You are logged in as " + userUsername);
+				    session("connected", userUsername);
+				    return redirect(routes.Application.testMainPage());
 				}
 			} 
 			

@@ -20,3 +20,6 @@ GET     /newuser controllers.Application.newUserPage()
 
 GET     /login controllers.Application.loginUserPage()
 
+GET     /testmain controllers.Application.testMainPage()
+
+GET     /logout controllers.Application.logout()

@@ -1,3 +1,4 @@
+@(message: String)
 <!DOCTYPE html>
 
 <html>
@@ -10,7 +11,7 @@
   
 		<div>
 		
-<h1>Sign in</h1>
+<h1>Create new user</h1>
 
 <form action="@routes.Application.addUser()" method ="post">
    <p>
@@ -20,10 +21,12 @@
        <input type="password" name="password" placeholder="Password">
    </p>
    <p>
-       <button type="submit">Login</button>
+       <button type="submit">Create</button>
    </p>
 		</form>
+		<p>@message</p>
 		</div>
+		
     </body>
 </html>
 </html>

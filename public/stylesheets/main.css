@@ -20,12 +20,12 @@
 }*/
 
 .ui-content {
-    padding: 0 !important; 
-    position : absolute !important; 
-    top : 150px !important;  
-    right : 100px !important; 
-    bottom : 100px !important;  
-    left : 100px !important; 
+    padding: 0; 
+    position : absolute; 
+    top : 150px;  
+    right : 7.5%; 
+    bottom : 100px;  
+    left : 7.5%; 
     background-color: black; 
   
 } 
@@ -50,3 +50,7 @@
     color: #FFF;
 }
 
+    .ui-grid-a, .ui-grid-a .ui-controlgroup-controls {width: 100%}
+    #hp {width:25% ; float:center}
+    #nf {width:25% ; float:center}
+    #ef {width:25% ; float:center}

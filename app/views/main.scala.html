@@ -25,13 +25,13 @@
             <div data-role="header" data-position = "fixed">
             <h1><img src="@routes.Assets.at("images/d2.png")"></h1>
 
-                <nav data-role="navbar" style = "text-align: center" img src="@routes.Assets.at("images/d2.png")">
-                    <a href="#" class="ui-btn-active">Home</a>
-                    <a href="#">About us</a>
-                    <a href="#">Product</a>
-                    <a href="#">Application</a>
-                    <a href="#">Contact us</a>
-                </nav>
+                <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
+                     <a href="#" data-role="button" id="hp">Home</a>
+                     <a href="#" data-role="button" id ="nf">News feed</a>
+                     <a href="#" data-role="button" id ="ef">Event feed</a>
+                </div>
+
+
             </div>
     <div data-role="content" id = "content"> 
            
@@ -87,8 +87,8 @@
             <div data-role="footer" data-position = "fixed">  
 
                 <div data-role="controlgroup" data-type="horizontal" style = "text-align: center">
-                     <a href="#" data-role="button" data-icon="star">About us :)</a>
-                     <a href="#" data-role="button" data-icon="mail">Contact us</a>
+                     <a href="#" data-role="button" data-icon="star">About</a>
+                     <a href="#" data-role="button" data-icon="mail">Contact</a>
                      <a href="#" data-role="button" data-icon="home">Dreamhack.se</a>
                      <a href="#" data-role="button" data-icon="info">FAQ</a>
 

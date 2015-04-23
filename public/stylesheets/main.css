@@ -20,8 +20,11 @@
 
 }
 .ui-content {
-   margin: 0 auto ;
+  padding: 25px 50px;
+    margin: 0 auto ;
     width: 40%;
+    border: 2px solid orange;
+    border-radius: 25px;
 } 
 
 .header-google a.ui-btn {
@@ -44,7 +47,9 @@
     color: #FFF;
 }
 
-    .ui-grid-a, .ui-grid-a .ui-controlgroup-controls {width: 100%}
-    #hp {width:25% ; float:center}
-    #nf {width:25% ; float:center}
-    #ef {width:25% ; float:center}
+    .ui-grid-a {width: 100%}
+    .ui-grid-a .ui-controlgroup-controls {width:70%}
+    #homepageB {width:15% ; float:center}
+    #newsfeedB {width:15% ; float:center}
+    #eventfeedB {width:15% ; float:center}
+    #hamburgerB {width:10% ; float:center}

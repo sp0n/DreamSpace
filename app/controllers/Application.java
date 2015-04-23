@@ -18,9 +18,13 @@ import play.libs.Json;
 
 public class Application extends Controller {
 
-	public static Result index() {
-		
-		return ok(index.render("Website"));
+	public static Result mainMethod() {
+		  String user = session("connected");
+        if(user != null) {
+             return ok(main.render("You are logged in as " + user));
+        } else {
+        return unauthorized(LoginUserPage.render("Welcome, login to explore the website"));
+        }
 	}
 
 	public static Result helloWeb() {
@@ -35,7 +39,7 @@ public class Application extends Controller {
 	public static Result newUserPage() {
 	    String currentUser = session("connected");
         if(currentUser != null) {
-             return ok(TestMainPage.render("You are already logged in as " + currentUser + " Please log out if you wish to create another account"));
+             return ok(main.render("You are already logged in as " + currentUser + " Please log out if you wish to create another account"));
         } 
 	    
 		return ok(NewUserPage.render(""));
@@ -45,21 +49,13 @@ public class Application extends Controller {
 	    
 	    String currentUser = session("connected");
         if(currentUser != null) {
-             return ok(TestMainPage.render("You are already logged in as " + currentUser));
+             return ok(main.render("You are already logged in as " + currentUser));
         } 
 	    
 		return ok(LoginUserPage.render(""));
 	}
 	
-	public static Result testMainPage() {
-	    String user = session("connected");
-        if(user != null) {
-             return ok(TestMainPage.render("You are logged in as " + user));
-        } else {
-        return unauthorized(LoginUserPage.render("You must login to access this page"));
-        }
-	}
-	
+
 	public static Result logout() {
 	    session().clear();
 		return redirect(routes.Application.loginUserPage());
@@ -100,7 +96,7 @@ public class Application extends Controller {
 
 			// user.save();
 			session("connected", userUsername);
-			return redirect(routes.Application.testMainPage());
+			return redirect(routes.Application.mainMethod());
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			return internalServerError(se.toString());
@@ -161,7 +157,7 @@ public class Application extends Controller {
 				if (userUsername.equals(username) && userPassword.equals(password)){
 				    rs.close();
 				    session("connected", userUsername);
-				    return redirect(routes.Application.testMainPage());
+				    return redirect(routes.Application.mainMethod());
 				}
 			} 
 			

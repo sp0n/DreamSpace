@@ -3,13 +3,21 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.mainMethod()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-# Test Name and Age
-GET /getName controllers.Application.getNameAge()
 
 #Hello Test
-GET /helloWeb controllers.Application.helloWeb()
+GET     /helloWeb controllers.Application.helloWeb()
+
+POST    /user controllers.Application.addUser()
+
+POST    /userGet controllers.Application.getUser()
+
+GET     /newuser controllers.Application.newUserPage()
+
+GET     /login controllers.Application.loginUserPage()
+
+GET     /logout controllers.Application.logout()

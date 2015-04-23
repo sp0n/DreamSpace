@@ -1,0 +1,32 @@
+@(message: String)
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Hello</title>
+<h1>HELLO</h1>
+    </head>
+    <body>
+ 
+  
+		<div>
+		
+<h1>Create new user</h1>
+
+<form action="@routes.Application.addUser()" method ="post">
+   <p>
+       <input type="username" name="username" placeholder="Username">
+   </p>
+   <p>
+       <input type="password" name="password" placeholder="Password">
+   </p>
+   <p>
+       <button type="submit">Create</button>
+   </p>
+		</form>
+		<p>@message</p>
+		</div>
+		
+    </body>
+</html>
+</html>

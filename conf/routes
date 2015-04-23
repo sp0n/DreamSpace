@@ -9,15 +9,17 @@ GET     /                           controllers.Application.mainMethod()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
-#Hello Test
-GET     /helloWeb controllers.Application.helloWeb()
-
+#Post to adduser - After register
 POST    /user controllers.Application.addUser()
 
+#Post to getuser - After login
 POST    /userGet controllers.Application.getUser()
 
-GET     /newuser controllers.Application.newUserPage()
+#Get to register user
+GET     /register controllers.Application.newUserPage()
 
+#Get to login
 GET     /login controllers.Application.loginUserPage()
 
+#Get to logout
 GET     /logout controllers.Application.logout()

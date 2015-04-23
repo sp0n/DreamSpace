@@ -1,6 +1,52 @@
-.ui-page { 
-	background: url('http://content.wallpapers-room.com/resolutions/1920x1200/V/Wallpapers-room_com___Vortex_noapple_purple_by_mgilchuk_1920x1200.jpg') ;;
+ .ui-page { 
+	background:  url("../images/Space_image.jpg");
     background-position:center center ;
-    background-attachment:scroll ;
+   	background-attachment:scroll ;
     background-size:100% 100% ;
+    height: 100%;
+
 }
+
+
+ /*#content {
+	position: relative;
+	border: 1px solid black;
+	background-color: black;
+	margin: 0 auto;
+	
+	width: 1000px;
+  top: 30px;
+
+}*/
+
+.ui-content {
+    padding: 0 !important; 
+    position : absolute !important; 
+    top : 150px !important;  
+    right : 100px !important; 
+    bottom : 100px !important;  
+    left : 100px !important; 
+    background-color: black; 
+  
+} 
+
+.header-google a.ui-btn {
+    border: none;
+    background: orange;
+    text-shadow: none;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.header-google .ui-btn-inner {
+    padding: 0;
+    height: 29px;
+    line-height: 29px;
+}
+
+.header-google a.ui-btn.ui-btn-active,
+.header-google a.ui-btn:hover{
+    color: #FFF;
+}
+

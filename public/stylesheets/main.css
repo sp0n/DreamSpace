@@ -14,17 +14,15 @@
         max-width: 100%;
 
 }
+.centerWrapp{
+ 
+    
 
-/*.ui-content {
-    padding: 0; 
-    position : absolute; 
-    top : 150px;  
-    right : 7.5%; 
-   
-    left : 7.5%; 
-    background-color: black; 
-  
-} */
+}
+.ui-content {
+   margin: 0 auto ;
+    width: 40%;
+} 
 
 .header-google a.ui-btn {
     border: none;

@@ -1,62 +1,7 @@
-New log file opened at Wed Apr 22 23:23:46 CEST 2015 by 8172@noname
-Taking next connection to: 63311
-New client attempting to connect on port: 63312-63311
-  Address = /192.168.1.67:63311
-This client on port 63312 has uuid b5b04c7b-84c3-4ae4-ac59-59e6760b2039 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-b5b04c7b-84c3-4ae4-ac59-59e6760b2039
-Taking next connection to: 63311
-New client attempting to connect on port: 63313-63311
-  Address = /192.168.1.67:63311
-Handshake exception on socket: 63313
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.read(SocketInputStream.java:150)
-	at java.net.SocketInputStream.read(SocketInputStream.java:121)
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
-	at java.io.DataInputStream.readInt(DataInputStream.java:387)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 63311
-New client attempting to connect on port: 63314-63311
-  Address = /192.168.1.67:63311
-This client on port 63314 has uuid bca5f5bd-f581-4ad7-b49a-ea7ed3644287 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-b5b04c7b-84c3-4ae4-ac59-59e6760b2039, activator-bca5f5bd-f581-4ad7-b49a-ea7ed3644287
-Taking next connection to: 63311
-New client attempting to connect on port: 63325-63311
-  Address = /192.168.1.67:63311
-Handshake exception on socket: 63325
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.read(SocketInputStream.java:150)
-	at java.net.SocketInputStream.read(SocketInputStream.java:121)
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
-	at java.io.DataInputStream.readInt(DataInputStream.java:387)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 63311
-New client attempting to connect on port: 63326-63311
-  Address = /192.168.1.67:63311
-This client on port 63326 has uuid 2f899e9c-8da6-4291-8d58-ef517d4df3ea configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-bca5f5bd-f581-4ad7-b49a-ea7ed3644287, play-fork-run-2f899e9c-8da6-4291-8d58-ef517d4df3ea
-Taking next connection to: 63311
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63311
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63311
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63311
+New log file opened at Thu Apr 23 08:30:13 CEST 2015 by 779@Fredriks-MBP
+Taking next connection to: 49919
+New client attempting to connect on port: 49920-49919
+  Address = /192.168.1.244:49919
+This client on port 49920 has uuid 2fc9e1e4-1ab2-4f87-8096-1b604f7b9c77 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-2fc9e1e4-1ab2-4f87-8096-1b604f7b9c77
+Taking next connection to: 49919

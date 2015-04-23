@@ -13,5 +13,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
-sbt-fork-run-plugin
-+addSbtPlugin("com.typesafe.play" % "sbt-fork-run-plugin" % "2.3.8")
+play-fork-run.sbt

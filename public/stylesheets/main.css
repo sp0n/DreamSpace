@@ -14,17 +14,14 @@
         max-width: 100%;
 
 }
-.centerWrapp{
- 
-    
-
-}
 .ui-content {
-  padding: 25px 50px;
+
+    padding: 25px 50px;
     margin: 0 auto ;
     width: 40%;
     border: 2px solid orange;
-    border-radius: 25px;
+    border-radius: 25px;  
+
 } 
 
 .header-google a.ui-btn {
@@ -47,6 +44,7 @@
     color: #FFF;
 }
 
+
     .ui-grid-a {width: 100%}
     .ui-grid-a .ui-controlgroup-controls {width:50%}
     #homepageB {width:15% ; float:center}
@@ -54,5 +52,6 @@
     #eventfeedB {width:15% ; float:center}
     #hamburgerB {width:10% ; float:center}
     #footerB {float:center}
+
 
 

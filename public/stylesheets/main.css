@@ -48,9 +48,11 @@
 }
 
     .ui-grid-a {width: 100%}
-    .ui-grid-a .ui-controlgroup-controls {width:70%}
+    .ui-grid-a .ui-controlgroup-controls {width:50%}
     #homepageB {width:15% ; float:center}
     #newsfeedB {width:15% ; float:center}
     #eventfeedB {width:15% ; float:center}
     #hamburgerB {width:10% ; float:center}
+    #footerB {float:center}
+
 

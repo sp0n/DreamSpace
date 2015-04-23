@@ -10,7 +10,7 @@
 
         <!-- JQuery Mobile -->
        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
@@ -40,10 +40,10 @@
    
 		</form>
 		<button id="button1">Register a new account</button>
-<script>
-	$('#button1').click(function() {
-	window.location='/register'; });
-	</script>
+		
+		<script type="text/javascript">
+            document.getElementById("button1").onclick = function () { location.href = "/register"; };
+            </script>
 		
 		<p>@message</p>
 		</div>

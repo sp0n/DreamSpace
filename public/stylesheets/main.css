@@ -1,36 +1,30 @@
  .ui-page { 
-	background:  url("../images/Space_image.jpg");
+/*	background:  url("../images/Space_image.jpg");
     background-position:center center ;
    	background-attachment:scroll ;
     background-size:100% 100% ;
-    height: 100%;
+    height: 100%;*/
+    background: black;
 
 }
 
+.fullscreen{
+    
+        max-height: 100%;
+        max-width: 100%;
 
- /*#content {
-	position: relative;
-	border: 1px solid black;
-	background-color: black;
-	margin: 0 auto;
-	
-	width: 1000px;
-  top: 30px;
-
-}*/
-
+}
 .ui-content {
-    padding: 0 !important; 
-    position : absolute !important; 
-    top : 150px !important;  
-    right : 100px !important; 
-    bottom : 100px !important;  
-    left : 100px !important; 
-    background-color: black; 
-  
+
+    padding: 25px 50px;
+    margin: 0 auto ;
+    width: 70%;
+    border: 2px solid orange;
+    border-radius: 25px;  
+
 } 
 
-.header-google a.ui-btn {
+/*.header-google a.ui-btn {
     border: none;
     background: orange;
     text-shadow: none;
@@ -43,10 +37,27 @@
     padding: 0;
     height: 29px;
     line-height: 29px;
-}
+}*/
 
-.header-google a.ui-btn.ui-btn-active,
+/*.header-google a.ui-btn.ui-btn-active,
 .header-google a.ui-btn:hover{
     color: #FFF;
-}
+}*/
+
+
+    /*.ui-grid-a {width: 100%}
+    .ui-grid-a .ui-controlgroup-controls {width:50%}
+    #homepageB {width:15% ; float:center}
+    #newsfeedB {width:15% ; float:center}
+    #eventfeedB {width:15% ; float:center}
+    #hamburgerB {width:10% ; float:center}
+    #footerB {float:center}*/
+
+.ui-page .ui-btn.my-btn  {
+    color      : white;
+    background : orange;
+}​
+
+
+
 

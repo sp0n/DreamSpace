@@ -10,10 +10,10 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
 #Post to adduser - After register
-POST    /user controllers.Application.addUser()
+POST    /user controllers.UserDatabase.addUser()
 
 #Post to getuser - After login
-POST    /userGet controllers.Application.getUser()
+POST    /userGet controllers.UserDatabase.getUser()
 
 #Get to register user
 GET     /register controllers.Application.newUserPage()

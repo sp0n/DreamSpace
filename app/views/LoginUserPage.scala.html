@@ -21,7 +21,7 @@
     </head>
     <body>
  
-  <div data-role="page" data-theme="b">
+  <div data-role="page" id = "login" data-theme="b">
     <div data-role="header"> 
        <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1> 
                       </div> 
@@ -29,49 +29,63 @@
 		
           <h1 >Log in</h1>
 
-            <form action="@routes.Application.getUser()" method ="post">
+            <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
+            
                <div data-role="fieldcontain"class="ui-hide-label" >
                   <label for="username">Username:</label>
                     <input type="text" name="username" id="username" value="" placeholder="Username"/>
                 </div>
+                
                <div data-role="fieldcontain" class="ui-hide-label">
-                  <label for="password" >Password:</label>
-                    <input type="text" name="password" id="password" value="" placeholder="password"/>
+                  <label for="Password" >Password:</label>
+                    <input type="password" name="password" id="password" value="" placeholder="Password"/>
                 </div>
 
-                
-               
-   
-   
-		        </form>
             <button data-role = "button" id="button2" type="submit">Login</button>
+            
+		        </form>
+		        
 		        <button data-role = "button" id="button1">Register a new account</button>
 		
-		        <script type="text/javascript">
-              $(function() {
-                $("#button2").click( function(){
-                     console.log("pressed button2");
+		
+		<script>
+	$('#button1').click(function() {
+	window.location='/register'; });
+	</script>
+		
+		
 
-                     if($("#username").val() && $("#password").val()){
-                      alert("Allt är korrekt i fyllt");
-                    }else
-                    alert("Du har ej fyllt i korrekt")
-                })
-              });
-     
-              $(function() {
-                $("#button1").click( function(){
-                    console.log("pressed button1");
-                    location.href = "/register";   
-                })
-              });
-           
+<script type="text/javascript">
+$(document).on('pageinit', '#login', function(){  
+$(document).on('click', '#button1', function() { // catch the form's submit event
+            if($('#username').val().length > 0 && $('#password').val().length > 0){
+    var frm = $('#loginform');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            async: 'true',
+            success: function (data) {
+                alert('ok');
+            },  error: function (error,response) {
+            var err = error;
+           var resp = response;
+            ev.preventDefault();
+            $("#footer").html('<div class="alert alert-error">Error: There was an error while submitting! ' + err + resp +  '</div>');
+            }
+            });
+        });
+    }
+});
+});
             </script>
-		         
+		  
 
          
 
 		        <p>@message</p>
+		        
 		  </div>
                 <div data-role="footer" data-position = "fixed">  
                   <h4>© 2015 DREAMSPACE AB</h4>

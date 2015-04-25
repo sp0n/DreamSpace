@@ -25,7 +25,57 @@ import play.mvc.*;
 
 public class UserDatabase extends Controller {
 	private final static int ITERATION_NUMBER = 1000;
+    
+   public static Result checkName() {
 
+		JsonNode json = request().body().asJson();
+
+		String name = json.findPath("username").textValue();
+	
+		String nameOnly = name.substring(name.lastIndexOf("=") + 1);
+		
+		Connection conn = null;
+		Statement stmt = null;
+
+		String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
+				+ nameOnly + "'";
+
+        String dbUser = null;
+
+		try {
+
+			conn = DB.getConnection();
+			stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.isBeforeFirst()) {
+				rs.next();
+
+				dbUser = rs.getString("username");
+			
+
+		}
+			return ok(dbUser);
+		
+		    
+		} catch (SQLException se) {
+			return ok("null");
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return ok("null");
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothin
+		}
+
+	}
+
+   
 	// Create user and send to database
 	public static Result addUser() {
 

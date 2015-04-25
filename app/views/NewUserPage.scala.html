@@ -55,7 +55,45 @@
                      <input type="submit" value="Create account" onclick="return validate()">
                 </form>
                 <p id="warning">@message</p>
-               
+               <!--
+                <script type="text/javascript">
+                $('#username').change(function() {
+                    $.ajax({
+                    type: "POST",
+                    url: "/spike",
+                    data: 
+                    success: function(data)
+                    {
+                    alert(data); // show response from the php script.
+                    }
+                    });
+
+                    return false; // avoid to execute the actual submit of the form.
+                    });
+                </script>
+                -->
+                
+                <script type="text/javascript">
+             $('#username').change(function() {
+              var name = $('#username').serialize();
+              var data = {"username" : name};
+            $.ajax({
+            url: "/checkName",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            dataType : 'html',
+            success: function(data){
+            if(data != "null") {
+               $("#warning").html('Username already exists');
+            } else {
+                 $("#warning").html('');
+            }
+            }
+            });
+            });
+  
+            </script>
                 
             <script type="text/javascript">
             function validate() {

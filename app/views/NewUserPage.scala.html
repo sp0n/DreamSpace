@@ -54,7 +54,7 @@
                     <!-- <button data-role = "button" id="button1" button type="submit">Create</button> -->
                      <input type="submit" value="Create account" onclick="return validate()">
                 </form>
-                <p>@message</p>
+                <p id="warning">@message</p>
                
                 
             <script type="text/javascript">
@@ -64,7 +64,7 @@
                 if(isBlank("username"))
                 {
                     blnValid = false;
-                    alert("Username name cannot be blank!")
+                    $("#warning").html('Username field cannot be blank!');
                     document.getElementById("username").focus();
                 }
                 if(blnValid)
@@ -72,7 +72,7 @@
                  if(isBlank("email"))
                 {
                     blnValid = false;
-                    alert("Email name cannot be blank!")
+                    $("#warning").html('Email field cannot be blank!');
                     document.getElementById("email").focus();
                 }
                 }
@@ -81,7 +81,7 @@
                  if(isBlank("password"))
                 {
                     blnValid = false;
-                    alert("Password name cannot be blank!")
+                     $("#warning").html('Password field cannot be blank!');
                     document.getElementById("password").focus();
                 }
                 }
@@ -90,9 +90,18 @@
                  if(isBlank("confirmPass"))
                 {
                     blnValid = false;
-                    alert("Confirm password name cannot be blank!")
+                    $("#warning").html('Confirm password field cannot be blank!');
                     document.getElementById("confirmPass").focus();
                 }
+                }
+                
+                if(blnValid)
+                {   
+                 if (document.getElementById('password').value != document.getElementById('confirmPass').value){
+                     blnValid = false; 
+                    $("#warning").html('Passwords didnt match');
+                     document.getElementById("password").focus();
+                 }
                 }
                 return blnValid;
             }

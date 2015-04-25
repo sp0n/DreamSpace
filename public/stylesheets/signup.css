@@ -17,10 +17,17 @@
     border-radius: 25px;  
     background: black;
 } 
+
+
 .fullscreen{
     
         max-height: 100%;
         max-width: 100%;
 
+}
+
+#warning {
+    color:red;
+    
 }
 

@@ -51,11 +51,64 @@
                     </div>
                     
 
-                    <button data-role = "button" id="button1" button type="submit">Create</button>
+                    <!-- <button data-role = "button" id="button1" button type="submit">Create</button> -->
+                     <input type="submit" value="Create account" onclick="return validate()">
                 </form>
                 <p>@message</p>
-            </div>
+               
+                
+            <script type="text/javascript">
+            function validate() {
+                var blnValid = true;
 
+                if(isBlank("username"))
+                {
+                    blnValid = false;
+                    alert("Username name cannot be blank!")
+                    document.getElementById("username").focus();
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("email"))
+                {
+                    blnValid = false;
+                    alert("Email name cannot be blank!")
+                    document.getElementById("email").focus();
+                }
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("password"))
+                {
+                    blnValid = false;
+                    alert("Password name cannot be blank!")
+                    document.getElementById("password").focus();
+                }
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("confirmPass"))
+                {
+                    blnValid = false;
+                    alert("Confirm password name cannot be blank!")
+                    document.getElementById("confirmPass").focus();
+                }
+                }
+                return blnValid;
+            }
+
+
+            function isBlank(elementID){
+                if(document.getElementById(elementID).value.length == 0){
+                    return true;
+                }
+                
+                return false;
+            }
+            </script>
+
+            </div>
+            
 	
 		    <div data-role="footer" data-position = "fixed">  
                 <h4>© 2015 DREAMSPACE AB</h4>

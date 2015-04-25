@@ -28,16 +28,19 @@
                 <div data-role="header" data-position = "fixed">
                     <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1>
 
-                   
 
-                    <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
-                        
-                        <a href="#" data-role="button" id="homepageB" class="my-btn">Home</a>
-                        <a href="#" data-role="button" id ="newsfeedB" class="my-btn">News feed</a>
-                        <a href="#" data-role="button" id ="eventfeedB" class="my-btn">Event feed</a>
-                        <a href="#bars"  class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all my-btn"id = "hamburgerB">No text</a>
 
-                    </div>
+
+               <div data-role="navbar" class="ui-grid-d">
+                    <ul>
+                        <li><a href="#" class="my-btn" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#" class="my-btn">News feed</a></li>
+                        <li><a href="#" class="my-btn">EArena feed</a></li>
+                        <li><a href="#bars" class = "my-btn">Meny</a></li>
+                    </ul>
+                </div>
+
+
 <button id="button1">Logout</button>
 <script>
 	$('#button1').click(function() {
@@ -90,7 +93,9 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
 
 
         </div>
-            <div data-role="footer" data-position = "fixed">  
+            <div data-role="footer">  
+
+
                 <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
                      <a href="#" data-role="button" data-icon="star" id="footerB"class="my-btn">About</a>
                      <a href="#" data-role="button" data-icon="mail" id="footerB"class="my-btn">Contact</a>
@@ -103,7 +108,7 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
 
             </div>
 
-            <div data-role="panel" id="bars" data-theme="b" data-display="overlay">
+            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%" >
               
                      <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
                      <a href="#" data-role="button" data-icon="tag"class="my-btn">Packlist</a>

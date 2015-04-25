@@ -17,5 +17,11 @@ public String username;
 @Constraints.Required 
 public String password;
 
+@Constraints.Required 
+public String email;
+
+@Constraints.Required 
+public String confirmPass;
+
 //public static Model.Finder<String, User> find = new Model.Finder<String, User>(String.class, User.class);
 }

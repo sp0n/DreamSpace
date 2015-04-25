@@ -39,7 +39,15 @@ public class UserDatabase extends Controller {
 		Statement stmt = null;
 		String userUsername = user.username;
 		String userPassword = user.password;
+		String userEmail = user.email;
+		String userConfirmPass = user.confirmPass;
 
+
+        if (!userPassword.equals(userConfirmPass)){
+        return badRequest(NewUserPage
+					.render("Passwords didn't match"));
+	    }
+	    
 		if (userUsername.matches("^.*[^a-zA-Z0-9].*$")) {
 			return badRequest(NewUserPage
 					.render("Please only use letters and numbers for the username"));
@@ -58,9 +66,9 @@ public class UserDatabase extends Controller {
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String insertIntoDatabase = "INSERT INTO user"
-					+ "(USERNAME, PASSWORD, SALT) " + "VALUES" + "(" + "'"
-					+ userUsername + "'" + "," + "'" + sDigest + "'" + ","
+			String insertIntoDatabase = "INSERT INTO User"
+					+ "(USERNAME, EMAIL, PASSWORD, SALT) " + "VALUES" + "(" + "'"
+					+ userUsername + "'" + "," + "'" + userEmail + "'" + "," + "'" + sDigest + "'" + ","
 					+ "'" + sSalt + "'" + ")";
 
 			// execute insert SQL stetement
@@ -69,8 +77,11 @@ public class UserDatabase extends Controller {
 			// user.save();
 			session("connected", userUsername);
 			return redirect(routes.Application.mainMethod());
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
+		    return badRequest(NewUserPage
+					.render("User with that name already exists"));
 		} catch (SQLException se) {
-			// Handle errors for JDBC
+            // Handle sql errors
 			return internalServerError(se.toString());
 		} catch (Exception e) {
 			// Handle errors for Class.forName
@@ -113,7 +124,7 @@ public class UserDatabase extends Controller {
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM `user` WHERE `username` = " + "'"
+			String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
 					+ userUsername + "'";
 
 			ResultSet rs = stmt.executeQuery(sql);
@@ -143,10 +154,10 @@ public class UserDatabase extends Controller {
 
 			rs.close();
 			return ok(LoginUserPage.render("Wrong user/pass"));
-
+			
 		} catch (SQLException se) {
-			// Handle errors for JDBC
-			return internalServerError(se.toString());
+			return badRequest(NewUserPage
+					.render("Error: " + se.toString()));
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			return internalServerError(e.toString());

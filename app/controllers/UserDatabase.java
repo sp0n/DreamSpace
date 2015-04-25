@@ -39,6 +39,7 @@ public class UserDatabase extends Controller {
 		Statement stmt = null;
 		String userUsername = user.username;
 		String userPassword = user.password;
+		String userEmail = user.email;
 
 		if (userUsername.matches("^.*[^a-zA-Z0-9].*$")) {
 			return badRequest(NewUserPage
@@ -58,9 +59,9 @@ public class UserDatabase extends Controller {
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String insertIntoDatabase = "INSERT INTO user"
-					+ "(USERNAME, PASSWORD, SALT) " + "VALUES" + "(" + "'"
-					+ userUsername + "'" + "," + "'" + sDigest + "'" + ","
+			String insertIntoDatabase = "INSERT INTO User"
+					+ "(USERNAME, EMAIL, PASSWORD, SALT) " + "VALUES" + "(" + "'"
+					+ userUsername + "'" + "," + "'" + userEmail + "'" + "," + "'" + sDigest + "'" + ","
 					+ "'" + sSalt + "'" + ")";
 
 			// execute insert SQL stetement
@@ -113,7 +114,7 @@ public class UserDatabase extends Controller {
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM `user` WHERE `username` = " + "'"
+			String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
 					+ userUsername + "'";
 
 			ResultSet rs = stmt.executeQuery(sql);

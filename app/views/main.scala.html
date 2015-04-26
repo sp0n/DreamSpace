@@ -36,19 +36,15 @@
                         <li><a href="#" class="my-btn" class="ui-btn-active ui-state-persist">Home</a></li>
                         <li><a href="#" class="my-btn">News feed</a></li>
                         <li><a href="#" class="my-btn">EArena feed</a></li>
-                        <li><a href="#bars" class = "my-btn">Meny</a></li>
+                        <li><a href="#bars" class = "my-btn">MyMeny</a></li>
                     </ul>
                 </div>
 
 
-<button id="button1">Logout</button>
-<script>
-	$('#button1').click(function() {
-	window.location='/logout'; });
-	</script>
-                </div>
-        <div data-role="content" > 
-           
+                
+        </div>
+        
+        <div data-role="content" >   
             </ul>
             <br> <br><p>
 			@message
@@ -108,13 +104,17 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
 
             </div>
 
-            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%" >
+            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
               
                      <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
-                     <a href="#" data-role="button" data-icon="tag"class="my-btn">Packlist</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">Earena</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">Etournament</a>
-
+                     <a href="#" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
+                    <button id="button1">Logout</button>
+                    <script>
+                        $('#button1').click(function() {
+                             window.location='/logout'; });
+                    </script>
 
             </div>
 

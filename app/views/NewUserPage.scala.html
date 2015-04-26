@@ -49,17 +49,25 @@
                         <label for="Confirm password" >Confirm password:</label>
                         <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
                     </div>
-                    
-
-                    <!-- <button data-role = "button" id="button1" button type="submit">Create</button> -->
+           
                      <input type="submit" value="Create account" onclick="return validate()">
                 </form>
                 <p id="warning">@message</p>
  
                 
              <script type="text/javascript">
+             
              var usernameOkay = true;
              $('#username').change(function() {
+            	 if( $('#username').val().length <1){
+            		 $("#warning").html('Username is too short!');
+            		 $("#warning").css('color', 'red');
+                     $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                     $('#redcross').width(50);
+                     $('#redcross').height(50);
+                     usernameOkay = false;
+                     return;
+            	 }
               var name = $('#username').serialize();
               var data = {"username" : name};
             $.ajax({
@@ -68,22 +76,28 @@
             contentType:'application/json',
             data: JSON.stringify(data),
             dataType : 'html',
+            
             success: function(data){
             if(data != "null") {
                $("#warning").html('Username already exists');
                $("#warning").css('color', 'red');
                $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+               $('#redcross').width(40);
+               $('#redcross').height(40);
                usernameOkay=false;
             } else {
                  $("#warning").html('Username is available');
                  $("#warning").css('color', 'green');
                  $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+                 $('#greentick').width(40);
+                 $('#greentick').height(40);
                  usernameOkay=true;
             }
             }
             });
             });
-  
+              
+  				
             </script>
                 
             <script type="text/javascript">

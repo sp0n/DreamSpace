@@ -7,12 +7,9 @@ import views.html.*;
 import play.data.Form;
 import play.db.*;
 import views.*;
-
 import java.sql.*;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
@@ -27,34 +24,21 @@ public class UserDatabase extends Controller {
 	private final static int ITERATION_NUMBER = 1000;
     
    public static Result checkName() {
-
 		JsonNode json = request().body().asJson();
-
 		String nameDirty = json.findPath("username").textValue();
-	
 		String nameOnly = nameDirty.substring(nameDirty.lastIndexOf("=") + 1);
-		
 		Connection conn = null;
 		Statement stmt = null;
 		String dbUser = null;
-
 		String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
 				+ nameOnly + "'";
-
-
 		try {
-
 			conn = DB.getConnection();
 			stmt = conn.createStatement();
-
 			ResultSet rs = stmt.executeQuery(sql);
-
 			if (rs.isBeforeFirst()) {
 				rs.next();
-
 				dbUser = rs.getString("username");
-			
-
 		}
 			return ok(dbUser);
 		} catch (SQLException se) {
@@ -76,26 +60,17 @@ public class UserDatabase extends Controller {
    
 	// Create user and send to database
 	public static Result addUser() {
+		Connection conn = null;
+		PreparedStatement preparedStatement;
 
 		if (Form.form(User.class).bindFromRequest().hasErrors()) {
-			return badRequest(NewUserPage.render("Leave no form empty"));
+			return badRequest(NewUserPage.render("There was an error in your form! No empty fields please!"));
 		}
-
+		
 		User user = Form.form(User.class).bindFromRequest().get();
-		ObjectNode result = Json.newObject();
-		Connection conn = null;
-		Statement stmt = null;
 		String userUsername = user.username;
 		String userPassword = user.password;
-		String userEmail = user.email;
-		String userConfirmPass = user.confirmPass;
-
-
-        if (!userPassword.equals(userConfirmPass)){
-        return badRequest(NewUserPage
-					.render("Passwords didn't match"));
-	    }
-	    
+		String userEmail = user.email;	    
 		if (userUsername.matches("^.*[^a-zA-Z0-9].*$")) {
 			return badRequest(NewUserPage
 					.render("Please only use letters and numbers for the username"));
@@ -111,20 +86,18 @@ public class UserDatabase extends Controller {
 			byte[] bDigest = getHash(ITERATION_NUMBER, userPassword, bSalt);
 			String sDigest = byteToBase64(bDigest);
 			String sSalt = byteToBase64(bSalt);
+			
 			conn = DB.getConnection();
-			stmt = conn.createStatement();
-
-			String insertIntoDatabase = "INSERT INTO User"
-					+ "(USERNAME, EMAIL, PASSWORD, SALT) " + "VALUES" + "(" + "'"
-					+ userUsername + "'" + "," + "'" + userEmail + "'" + "," + "'" + sDigest + "'" + ","
-					+ "'" + sSalt + "'" + ")";
-
-			// execute insert SQL stetement
-			stmt.executeUpdate(insertIntoDatabase);
-
-			// user.save();
+			String insertIntoDatabase = "INSERT INTO User (USERNAME, EMAIL, PASSWORD, SALT) VALUES(?,?,?,?)";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setString(1, userUsername);
+			preparedStatement.setString(2, userEmail);
+			preparedStatement.setString(3, sDigest);
+			preparedStatement.setString(4, sSalt);
+			preparedStatement.executeUpdate();
 			session("connected", userUsername);
 			return redirect(routes.Application.mainMethod());
+			
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
 		    return badRequest(NewUserPage
 					.render("User with that name already exists"));
@@ -136,11 +109,11 @@ public class UserDatabase extends Controller {
 			return internalServerError(e.toString());
 		} finally {
 			// finally block used to close resources
-			try {
-				if (stmt != null)
-					conn.close();
-			} catch (SQLException se) {
-			}// do nothing
+//			try {
+//				if (preparedStatement != null)
+//					conn.close();
+//			} catch (SQLException se) {
+//			}// do nothing
 			try {
 				if (conn != null)
 					conn.close();
@@ -151,31 +124,26 @@ public class UserDatabase extends Controller {
 
 	}
 
-	// Method for user login. Requests database reply for entered username,
-	// reacts accordingly.
+	// Method for user login. Requests database reply for entered username, reacts accordingly.
 	public static Result getUser() {
-
-		Connection conn = null;
-		Statement stmt = null;
+		Connection conn = null;	
+		PreparedStatement preparedStatement;
 
 		if (Form.form(User.class).bindFromRequest().hasErrors()) {
-			return badRequest(LoginUserPage.render("WERFSDFSD"));
+			return badRequest(LoginUserPage.render("There was an error in your form! No empty fields please!"));
 		}
 
 		User user = Form.form(User.class).bindFromRequest().get();
-
 		String userUsername = user.username;
 		String userPassword = user.password;
 
 		try {
-
 			conn = DB.getConnection();
-			stmt = conn.createStatement();
-
-			String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
-					+ userUsername + "'";
-
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM User WHERE username=?";
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, userUsername);
+			ResultSet rs = preparedStatement.executeQuery();
+			
 			if (rs.isBeforeFirst()) {
 				rs.next();
 
@@ -211,11 +179,11 @@ public class UserDatabase extends Controller {
 			return internalServerError(e.toString());
 		} finally {
 			// finally block used to close resources
-			try {
-				if (stmt != null)
-					conn.close();
-			} catch (SQLException se) {
-			}// do nothing
+//			try {
+//				if (preparedStatement != null)
+//					conn.close();
+//			} catch (SQLException se) {
+//			}// do nothing
 			try {
 				if (conn != null)
 					conn.close();

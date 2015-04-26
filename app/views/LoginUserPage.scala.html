@@ -24,74 +24,67 @@
     <div data-role="header"> 
        <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1> 
                       </div> 
+                      
 		  <div data-role = "content">
 		
           <h1 >Log in</h1>
-
-            <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
+            	<form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false" >
             
                <div data-role="fieldcontain"class="ui-hide-label">
-                  <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" value="" placeholder="Username"/>
-                </div>
-                
+               <label for="username">Username:</label>
+               <input type="text" name="username" id="username" value="" placeholder="Username"/>
+               </div>
+          
                <div data-role="fieldcontain" class="ui-hide-label">
-                  <label for="Password" >Password:</label>
-                    <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                </div>
-
-            <button data-role = "button" id="button2" type="submit">Login</button>
-            
+               <label for="Password" >Password:</label>
+               <input type="password" name="password" id="password" value="" placeholder="Password"/>
+               </div>
+      
+				<input type="submit" value="Login" onclick="return validate()">
+       
 		        </form>
 		        
 		        <button data-role = "button" id="button1">Register a new account</button>
 		
-		
-		<script>
-	$('#button1').click(function() {
+		        <p id="warning">@message</p>
+<script>
+$('#button1').click(function() {
 	window.location='/register'; });
 	</script>
 		
 		
 
 <script type="text/javascript">
-$(document).on('pageinit', '#login', function(){  
-$(document).on('click', '#button2', function() { // catch the form's submit event
-            if($('#username').val().length > 0 && $('#password').val().length > 0){
-    var frm = $('#loginform');
-    frm.submit(function (ev) {
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            async: 'true',
-            error: function (error,response) {
-            var err = error;
-            var resp = response;
-            ev.preventDefault();
-            $("#footer").html('<div class="alert alert-error">Error: There was an error while submitting! ' + err + resp +  '</div>');
-            }
-            });
-        });
+function validate(){
+ 	var blnValid = true;
+ 	
+	if(isBlank("username"))
+	{
+		blnValid = false;
+		$("#warning").html('Username field cannot be blank!');
+	    document.getElementById("username").focus();
+	}
+	if(isBlank("password"))
+	{   
+	blnValid = false;
+	$("#warning").html('Password field cannot be blank!');
+	document.getElementById("password").focus();
+	}
+	return blnValid;
+	}
+	
+	
+function isBlank(elementID){
+    if(document.getElementById(elementID).value.length == 0){
+        return true;
     }
-});
-});
-            </script>
-		  
-
-         
-
-		        <p>@message</p>
-		        
-		  </div>
-                <div data-role="footer" data-position = "fixed">  
-                  <h4>© 2015 DREAMSPACE AB</h4>
-                </div>
-
-                
-
-          
-    </div>        
-    </body>
-
+    return false;
+}
+</script>	        
+</div>
+<div data-role="footer" data-position = "fixed">  
+<h4>© 2015 DREAMSPACE AB</h4>
+</div>
+</div>        
+</body>
 </html>

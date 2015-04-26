@@ -55,30 +55,15 @@
                      <input type="submit" value="Create account" onclick="return validate()">
                 </form>
                 <p id="warning">@message</p>
-               <!--
-                <script type="text/javascript">
-                $('#username').change(function() {
-                    $.ajax({
-                    type: "POST",
-                    url: "/spike",
-                    data: 
-                    success: function(data)
-                    {
-                    alert(data); // show response from the php script.
-                    }
-                    });
-
-                    return false; // avoid to execute the actual submit of the form.
-                    });
-                </script>
-                -->
+ 
                 
-                <script type="text/javascript">
+             <script type="text/javascript">
+             var usernameOkay = true;
              $('#username').change(function() {
               var name = $('#username').serialize();
               var data = {"username" : name};
             $.ajax({
-            url: "/checkName",
+            url: "/checkname",
             type: 'POST',
             contentType:'application/json',
             data: JSON.stringify(data),
@@ -86,8 +71,14 @@
             success: function(data){
             if(data != "null") {
                $("#warning").html('Username already exists');
+               $("#warning").css('color', 'red');
+               $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+               usernameOkay=false;
             } else {
-                 $("#warning").html('');
+                 $("#warning").html('Username is available');
+                 $("#warning").css('color', 'green');
+                 $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+                 usernameOkay=true;
             }
             }
             });
@@ -97,11 +88,17 @@
                 
             <script type="text/javascript">
             function validate() {
+            	
                 var blnValid = true;
-
+				if(!usernameOkay)
+					{
+					blnValid = false;
+					document.getElementById("username").focus();
+					}
                 if(isBlank("username"))
                 {
                     blnValid = false;
+                    $("#warning").css('color', 'red');
                     $("#warning").html('Username field cannot be blank!');
                     document.getElementById("username").focus();
                 }
@@ -110,6 +107,7 @@
                  if(isBlank("email"))
                 {
                     blnValid = false;
+                    $("#warning").css('color', 'red');
                     $("#warning").html('Email field cannot be blank!');
                     document.getElementById("email").focus();
                 }
@@ -119,6 +117,7 @@
                  if(isBlank("password"))
                 {
                     blnValid = false;
+                    $("#warning").css('color', 'red');
                      $("#warning").html('Password field cannot be blank!');
                     document.getElementById("password").focus();
                 }
@@ -128,6 +127,7 @@
                  if(isBlank("confirmPass"))
                 {
                     blnValid = false;
+                    $("#warning").css('color', 'red');
                     $("#warning").html('Confirm password field cannot be blank!');
                     document.getElementById("confirmPass").focus();
                 }
@@ -137,6 +137,7 @@
                 {   
                  if (document.getElementById('password').value != document.getElementById('confirmPass').value){
                      blnValid = false; 
+                     $("#warning").css('color', 'red');
                     $("#warning").html('Passwords didnt match');
                      document.getElementById("password").focus();
                  }
@@ -152,14 +153,11 @@
                 
                 return false;
             }
-            </script>
-
-            </div>
-            
-	
-		    <div data-role="footer" data-position = "fixed">  
-                <h4>© 2015 DREAMSPACE AB</h4>
-            </div>
-        </div>
-    </body>
+</script>
+</div>
+<div data-role="footer" data-position = "fixed">  
+<h4>© 2015 DREAMSPACE AB</h4>
+</div>
+</div>
+</body>
 </html>

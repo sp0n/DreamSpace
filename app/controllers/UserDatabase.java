@@ -30,17 +30,17 @@ public class UserDatabase extends Controller {
 
 		JsonNode json = request().body().asJson();
 
-		String name = json.findPath("username").textValue();
+		String nameDirty = json.findPath("username").textValue();
 	
-		String nameOnly = name.substring(name.lastIndexOf("=") + 1);
+		String nameOnly = nameDirty.substring(nameDirty.lastIndexOf("=") + 1);
 		
 		Connection conn = null;
 		Statement stmt = null;
+		String dbUser = null;
 
 		String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
 				+ nameOnly + "'";
 
-        String dbUser = null;
 
 		try {
 
@@ -57,8 +57,6 @@ public class UserDatabase extends Controller {
 
 		}
 			return ok(dbUser);
-		
-		    
 		} catch (SQLException se) {
 			return ok("null");
 		} catch (Exception e) {
@@ -161,7 +159,7 @@ public class UserDatabase extends Controller {
 		Statement stmt = null;
 
 		if (Form.form(User.class).bindFromRequest().hasErrors()) {
-			return badRequest(LoginUserPage.render("Leave no form empty"));
+			return badRequest(LoginUserPage.render("WERFSDFSD"));
 		}
 
 		User user = Form.form(User.class).bindFromRequest().get();
@@ -228,11 +226,7 @@ public class UserDatabase extends Controller {
 
 	}
 
-	// public static byte[] base64ToByte(String data) throws IOException {
-	// BASE64Decoder decoder = new BASE64Decoder();
-	// return decoder.decodeBuffer(data);
-	// }
-	//
+
 	private static byte[] getHash(int iterationNumber, String password,
 			byte[] salt) throws NoSuchAlgorithmException,
 			UnsupportedEncodingException {

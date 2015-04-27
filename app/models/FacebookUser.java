@@ -4,21 +4,22 @@ import java.util.*;
 
 import javax.persistence.*;
 
-
+import play.db.ebean.*;
 import play.data.validation.*;
 import play.db.ebean.Model;
 
 @Entity
-public class User extends Model{
+public class FacebookUser extends Model{
 
 @Id @Constraints.Required
-public String username;
+public long id;
+	
+@Constraints.Required
+public String name;
 
 @Constraints.Required 
-public String password;
-
-
 public String email;
+
 
 
 

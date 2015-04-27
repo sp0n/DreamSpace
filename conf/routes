@@ -12,6 +12,9 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 #Post to adduser - After register
 POST    /user controllers.UserDatabase.addUser()
 
+#Post to addFacebookuser after login
+POST 	/addfacebookuser controllers.FacebookDatabase.addFacebookUser()
+
 #Post to getuser - After login
 POST    /userGet controllers.UserDatabase.getUser()
 
@@ -26,3 +29,6 @@ GET     /logout controllers.Application.logout()
 
 #Post to check if username exists route
 POST 	/checkname controllers.UserDatabase.checkName()
+
+#Post to check is Facebook user has a database entry
+POST /FacebookCheck controllers.FacebookDatabase.CheckIfExistsFacebook()

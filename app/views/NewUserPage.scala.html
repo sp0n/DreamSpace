@@ -15,8 +15,7 @@
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/signup.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
-        
+     
     </head>
     <body>
         <div data-role="page" id = "signup" data-theme="b">
@@ -60,7 +59,7 @@
              var usernameOkay = true;
              $('#username').change(function() {
             	 if( $('#username').val().length <1){
-            		 $("#warning").html('Username is too short!');
+            		 $("#warning").html('Username is too short! Please enter a minimum of x characters!');
             		 $("#warning").css('color', 'red');
                      $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
                      $('#redcross').width(50);
@@ -68,6 +67,16 @@
                      usernameOkay = false;
                      return;
             	 }
+            	 
+            	 if(/[^a-zåäöA-ZÅÄÖ0-9_]/.test( $('#username').val())){
+            	 $("#warning").html('Username contains invalid characters! Please only use letters, numbers and _');
+        	 $("#warning").css('color', 'red');
+                 $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                 $('#redcross').width(40);
+                 $('#redcross').height(40);
+                 usernameOkay = false;
+                 return;
+            }
               var name = $('#username').serialize();
               var data = {"username" : name};
             $.ajax({

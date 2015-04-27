@@ -23,3 +23,6 @@ GET     /login controllers.Application.loginUserPage()
 
 #Get to logout
 GET     /logout controllers.Application.logout()
+
+#Post to check if username exists route
+POST 	/checkname controllers.UserDatabase.checkName()

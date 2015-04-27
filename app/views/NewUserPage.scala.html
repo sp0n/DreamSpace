@@ -49,17 +49,129 @@
                         <label for="Confirm password" >Confirm password:</label>
                         <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
                     </div>
-                    
-
-                    <button data-role = "button" id="button1" button type="submit">Create</button>
+           
+                     <input type="submit" value="Create account" onclick="return validate()">
                 </form>
-                <p>@message</p>
-            </div>
+                <p id="warning">@message</p>
+ 
+                
+             <script type="text/javascript">
+             
+             var usernameOkay = true;
+             $('#username').change(function() {
+            	 if( $('#username').val().length <1){
+            		 $("#warning").html('Username is too short!');
+            		 $("#warning").css('color', 'red');
+                     $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                     $('#redcross').width(50);
+                     $('#redcross').height(50);
+                     usernameOkay = false;
+                     return;
+            	 }
+              var name = $('#username').serialize();
+              var data = {"username" : name};
+            $.ajax({
+            url: "/checkname",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            dataType : 'html',
+            
+            success: function(data){
+            if(data != "null") {
+               $("#warning").html('Username already exists');
+               $("#warning").css('color', 'red');
+               $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+               $('#redcross').width(40);
+               $('#redcross').height(40);
+               usernameOkay=false;
+            } else {
+                 $("#warning").html('Username is available');
+                 $("#warning").css('color', 'green');
+                 $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+                 $('#greentick').width(40);
+                 $('#greentick').height(40);
+                 usernameOkay=true;
+            }
+            }
+            });
+            });
+              
+  				
+            </script>
+                
+            <script type="text/javascript">
+            function validate() {
+            	
+                var blnValid = true;
+				if(!usernameOkay)
+					{
+					blnValid = false;
+					document.getElementById("username").focus();
+					}
+                if(isBlank("username"))
+                {
+                    blnValid = false;
+                    $("#warning").css('color', 'red');
+                    $("#warning").html('Username field cannot be blank!');
+                    document.getElementById("username").focus();
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("email"))
+                {
+                    blnValid = false;
+                    $("#warning").css('color', 'red');
+                    $("#warning").html('Email field cannot be blank!');
+                    document.getElementById("email").focus();
+                }
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("password"))
+                {
+                    blnValid = false;
+                    $("#warning").css('color', 'red');
+                     $("#warning").html('Password field cannot be blank!');
+                    document.getElementById("password").focus();
+                }
+                }
+                if(blnValid)
+                {   
+                 if(isBlank("confirmPass"))
+                {
+                    blnValid = false;
+                    $("#warning").css('color', 'red');
+                    $("#warning").html('Confirm password field cannot be blank!');
+                    document.getElementById("confirmPass").focus();
+                }
+                }
+                
+                if(blnValid)
+                {   
+                 if (document.getElementById('password').value != document.getElementById('confirmPass').value){
+                     blnValid = false; 
+                     $("#warning").css('color', 'red');
+                    $("#warning").html('Passwords didnt match');
+                     document.getElementById("password").focus();
+                 }
+                }
+                return blnValid;
+            }
 
-	
-		    <div data-role="footer" data-position = "fixed">  
-                <h4>© 2015 DREAMSPACE AB</h4>
-            </div>
-        </div>
-    </body>
+
+            function isBlank(elementID){
+                if(document.getElementById(elementID).value.length == 0){
+                    return true;
+                }
+                
+                return false;
+            }
+</script>
+</div>
+<div data-role="footer" data-position = "fixed">  
+<h4>© 2015 DREAMSPACE AB</h4>
+</div>
+</div>
+</body>
 </html>

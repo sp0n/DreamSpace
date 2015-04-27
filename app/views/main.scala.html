@@ -26,32 +26,36 @@
         <div data-role="page" data-theme="b" class="header-google">   
 
                 <div data-role="header" data-position = "fixed">
+                    @message
                     <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1>
 
-                   
 
-                    <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
-                        
-                        <a href="#" data-role="button" id="homepageB" class="my-btn">Home</a>
-                        <a href="#" data-role="button" id ="newsfeedB" class="my-btn">News feed</a>
-                        <a href="#" data-role="button" id ="eventfeedB" class="my-btn">Event feed</a>
-                        <a href="#bars"  class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all my-btn"id = "hamburgerB">No text</a>
 
-                    </div>
-                    
-<button id="button1">Logout</button>
-<script>
-	$('#button1').click(function() {
-	window.location='/logout'; });
-	</script>
+
+
+               <div data-role="navbar" class="ui-grid-d">
+                    <ul>
+                        <li><a href="#" class="my-btn" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#" class="my-btn">News feed</a></li>
+                        <li><a href="#" class="my-btn">EArena feed</a></li>
+                        <li><a href="#bars" class = "my-btn">MyMeny</a></li>
+                    </ul>
                 </div>
+
+
                 
-        <div data-role="content" > 
-           
+        </div>
+        
+        <div data-role="content" >   
             </ul>
-            <br> <br><p>
-			@message
-			<br>
+            <p>
+            <h1 align="center">News feed</h1>
+            <div style="overflow: hidden; margin: 15px auto; max-width: 700px;">
+                <iframe scrolling="no" src="http://dreamhack.se/dhs15/" style="border: 0px none; margin-left: -20px; height: 8050px; margin-top: -370px; width: 850px;">
+                </iframe>
+              
+            </div>
+
 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
 
 Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex.
@@ -92,7 +96,9 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
 
 
         </div>
-            <div data-role="footer" data-position = "fixed">  
+            <div data-role="footer">  
+
+
                 <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
                      <a href="#" data-role="button" data-icon="star" id="footerB"class="my-btn">About</a>
                      <a href="#" data-role="button" data-icon="mail" id="footerB"class="my-btn">Contact</a>
@@ -105,13 +111,17 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
 
             </div>
 
-            <div data-role="panel" id="bars" data-theme="b" data-display="overlay">
+            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
               
                      <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
-                     <a href="#" data-role="button" data-icon="tag"class="my-btn">Packlist</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">Earena</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">Etournament</a>
-
+                     <a href="#" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
+                    <button id="button1">Logout</button>
+                    <script>
+                        $('#button1').click(function() {
+                             window.location='/logout'; });
+                    </script>
 
             </div>
 

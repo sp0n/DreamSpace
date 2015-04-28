@@ -34,9 +34,11 @@ public class UserDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String sql = "SELECT * FROM User WHERE username=?";
+			String sql = "SELECT * FROM User u cross join FacebookUser fu where u.username =?or fu.username =? LIMIT 1";
 			preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, nameOnly);
+			preparedStatement.setString(2, nameOnly);
+			
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.isBeforeFirst()) {

@@ -48,15 +48,14 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+      
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
+   
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+   
     }
   }
 
@@ -111,8 +110,6 @@
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
       
       var data = {"id":response.id};
       $.ajax({
@@ -121,19 +118,21 @@
       contentType:'application/json',
       data: JSON.stringify(data),
       dataType : 'html',
-      
       success: function(data){
-    	  $("#warning").html(data);
+    	  
     	  if(data == "null"){ 
-    var data = {"id":response.id, "name":response.name,"email":response.email};
-    $.ajax({
-    url: '/addfacebookuser',
-    type: 'POST',
-    contentType:'application/json',
-    data: JSON.stringify(data),
-    });
-    	  }
-      }
+            var data = {"id":response.id, "name":response.name,"email":response.email};
+            $.ajax({
+                url: '/addfacebookuser',
+                type: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify(data),
+            });
+           
+    	 }
+    	 console.log('Reload after login');
+    	 location.reload();
+     }
     });
   });
   }
@@ -173,10 +172,11 @@
        
 		        </form>
 		        
-		        <button data-role = "button" id="button1">Register a new account</button>
+		        <button data-role ="button" id="button1">Register a new account</button>
 		        
-		        <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" ></div>
-		
+		        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button>
+                
 		        <p id="warning">@message</p>
 <script>
 $('#button1').click(function() {

@@ -58,10 +58,15 @@ public class FacebookDatabase extends Controller {
 			if (rs.isBeforeFirst()) {
 				rs.next();
 				fbUser = rs.getString("username");
-		}
+		    }
+		    
+			if(fbUser == null){
+			    return ok("null");
+			}
 			
 			session("connected", fbUser);
-			return ok("@routes.Application.mainMethod()");
+			return ok("");
+			
 		} catch (SQLException se) {
 			return ok("null");
 		} catch (Exception e) {

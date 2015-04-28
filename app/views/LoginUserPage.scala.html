@@ -17,6 +17,7 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
               
         <script>
+        
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '850805461661221',
@@ -37,6 +38,7 @@
     
     
     <script>
+    var buttonClicked = false;
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -52,6 +54,7 @@
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
    
+   
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
@@ -63,6 +66,8 @@
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
+      buttonClicked = true;
+     
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
@@ -120,18 +125,15 @@
       dataType : 'html',
       success: function(data){
     	  
-    	  if(data == "null"){ 
-            var data = {"id":response.id, "name":response.name,"email":response.email};
-            $.ajax({
-                url: '/addfacebookuser',
-                type: 'POST',
-                contentType:'application/json',
-                data: JSON.stringify(data),
-            });
+    	  if(data == "null" && buttonClicked){ 
+    	      
+           window.location = "/chooseusername";
            
-    	 }
+    	 } else {
+    	 
     	 console.log('Reload after login');
     	 location.reload();
+    	 }
      }
     });
   });

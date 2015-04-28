@@ -15,24 +15,6 @@ import play.db.*;
 public class FacebookDatabase extends Controller {
 	
 	
-	
-	public static Result addFacebookUserSpike(){
-		JsonNode json = request().body().asJson();
-		try{
-	String idDirty = json.findPath("id").textValue();
-		long idLong = Long.parseLong(idDirty);
-		
-		String nameDirty = json.findPath("name").textValue();
-		
-		String emailDirty = json.findPath("email").textValue();
-		
-	return ok("" + idDirty + " " + nameDirty + " " + emailDirty +"");
-	}
-	catch(NumberFormatException nfe){
-		return ok(nfe.toString());
-	}
-	}
-	
 	 
 	public static Result checkIfExistsFacebook() {
 		
@@ -91,6 +73,8 @@ public class FacebookDatabase extends Controller {
 		
 		JsonNode json = request().body().asJson();
 		
+		String username = json.findPath("username").textValue();
+		
 		String id = json.findPath("id").textValue();
 		long idLong = Long.parseLong(id);
 		
@@ -101,15 +85,16 @@ public class FacebookDatabase extends Controller {
 		try {
 			
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO FacebookUser (USERID, USERNAME, EMAIL) VALUES(?,?,?)";
+			String insertIntoDatabase = "INSERT INTO FacebookUser (USERNAME, USERID, NAME, EMAIL) VALUES(?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			
-			preparedStatement.setLong(1, idLong);
-			preparedStatement.setString(2, name);
-			preparedStatement.setString(3, email);
+			preparedStatement.setString(1, username);
+			preparedStatement.setLong(2, idLong);
+			preparedStatement.setString(3, name);
+			preparedStatement.setString(4, email);
 			preparedStatement.executeUpdate();
 			
-			session("connected", name);
+			session("connected", username);
 			return redirect(routes.Application.mainMethod());
 			
 		} 	catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){

@@ -49,6 +49,16 @@ public class Application extends Controller {
 
 		return ok(NewUserPage.render(""));
 	}
+	
+	public static Result chooseUsername() {
+		String currentUser = session("connected");
+		if (currentUser != null) {
+			return ok(main.render("You are already logged in as " + currentUser
+					+ " Please log out if you wish to create another account"));
+		}
+
+		return ok(ChooseUsername.render(""));
+	}
 
 	public static Result loginUserPage() {
 

@@ -33,27 +33,35 @@ public class FacebookDatabase extends Controller {
 	}
 	}
 	
-	
+	 
 	public static Result checkIfExistsFacebook() {
 		
+	    Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		
 		JsonNode json = request().body().asJson();
+		
 		String id = json.findPath("id").textValue();
 		long idLong = Long.parseLong(id);
-				
-		Connection conn = null;
-		Statement stmt = null;
-		String dbUser = null;
-		String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
-				+ nameOnly + "'";
+		String fbUser = null;
+	
+	
+	
 		try {
-			conn = DB.getConnection();
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+		    
+		    conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM FacebookUser WHERE USERID=?";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setLong(1, idLong);
+			
+			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.isBeforeFirst()) {
 				rs.next();
-				dbUser = rs.getString("username");
+				fbUser = rs.getString("username");
 		}
-			return ok(dbUser);
+			
+			session("connected", fbUser);
+			return ok("@routes.Application.mainMethod()");
 		} catch (SQLException se) {
 			return ok("null");
 		} catch (Exception e) {
@@ -62,10 +70,10 @@ public class FacebookDatabase extends Controller {
 		} finally {
 			// finally block used to close resources
 			try {
-				if (stmt != null)
+				if (preparedStatement != null)
 					conn.close();
 			} catch (SQLException se) {
-			}// do nothin
+			}// do nothing
 		}
 
 	}

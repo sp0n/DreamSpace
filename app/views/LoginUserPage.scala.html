@@ -106,7 +106,7 @@
   }(document, 'script', 'facebook-jssdk'));
 
   // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
+  // successful.  See statusChangeCallback() for when this call is made.   
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
@@ -114,22 +114,26 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
       
+      var data = {"id":response.id};
+      $.ajax({
+      url: '/facebookcheck',
+      type: 'POST',
+      contentType:'application/json',
+      data: JSON.stringify(data),
+      dataType : 'html',
+      
+      success: function(data){
+    	  $("#warning").html(data);
+    	  if(data == "null"){ 
     var data = {"id":response.id, "name":response.name,"email":response.email};
     $.ajax({
     url: '/addfacebookuser',
     type: 'POST',
     contentType:'application/json',
     data: JSON.stringify(data),
-    dataType : 'html',
-    
-    success: function(data){
-    	$("#warning").html(data  + "  This is the data you received");
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        
-        $("#warning").html("Status: " + textStatus + " Error: " + errorThrown);
-    }       
-
+    });
+    	  }
+      }
     });
   });
   }
@@ -140,17 +144,10 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
-<div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" ></div>
-
-
-
 <div id="status">
 </div>
     
-    
-    
-    
+
  
   <div data-role="page" id = "login" data-theme="b">
     <div data-role="header"> 
@@ -177,6 +174,8 @@
 		        </form>
 		        
 		        <button data-role = "button" id="button1">Register a new account</button>
+		        
+		        <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" ></div>
 		
 		        <p id="warning">@message</p>
 <script>

@@ -33,6 +33,12 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
+	
+	public static Result facebookExistLogin(){
+	
+		return mainMethod();
+	}
+	
 
 	public static Result newUserPage() {
 		String currentUser = session("connected");

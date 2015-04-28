@@ -31,4 +31,8 @@ GET     /logout controllers.Application.logout()
 POST 	/checkname controllers.UserDatabase.checkName()
 
 #Post to check is Facebook user has a database entry
-POST /FacebookCheck controllers.FacebookDatabase.CheckIfExistsFacebook()
+POST /facebookcheck controllers.FacebookDatabase.checkIfExistsFacebook()
+
+#Existing FbUser Login
+
+GET /existfacebooklogin controllers.Application.facebookExistLogin()

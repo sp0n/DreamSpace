@@ -34,5 +34,8 @@ POST 	/checkname controllers.UserDatabase.checkName()
 POST /facebookcheck controllers.FacebookDatabase.checkIfExistsFacebook()
 
 #Existing FbUser Login
-
 GET /existfacebooklogin controllers.Application.facebookExistLogin()
+
+#Get to choosing username
+GET /chooseusername controllers.Application.chooseUsername()
+

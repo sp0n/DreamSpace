@@ -39,6 +39,10 @@ public class Application extends Controller {
 		return mainMethod();
 	}
 	
+	public static Result tournament(){
+		return ok(TournamentPage.render("WEienr"));
+	}
+	
 
 	public static Result newUserPage() {
 		String currentUser = session("connected");

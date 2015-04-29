@@ -39,3 +39,5 @@ GET /existfacebooklogin controllers.Application.facebookExistLogin()
 #Get to choosing username
 GET /chooseusername controllers.Application.chooseUsername()
 
+GET /tournament controllers.Application.tournament()
+

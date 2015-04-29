@@ -39,10 +39,6 @@ public class Application extends Controller {
 		return mainMethod();
 	}
 	
-	public static Result tournament(){
-		return ok(TournamentPage.render("WEienr"));
-	}
-	
 
 	public static Result newUserPage() {
 		String currentUser = session("connected");
@@ -73,6 +69,16 @@ public class Application extends Controller {
 		}
 
 		return ok(LoginUserPage.render(""));
+	}
+	
+		public static Result tournament() {
+		String user = session("connected");
+		if (user != null) {
+			return ok(TournamentPage.render("You are logged in as " + user));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
 	}
 
 	public static Result logout() {

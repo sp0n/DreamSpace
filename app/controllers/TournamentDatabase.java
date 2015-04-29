@@ -13,37 +13,33 @@
 //import play.db.*;
 //
 //
-//public class TournamentDatabase {
+//public class TournamentDatabase extends Controller {
+//    
+//    public static Result addTournament() {
+//        Connection conn = null;
+//        PreparedStatement preparedStatement = null;
+//        
+// 
+//  Tournament tour = Form.form(Tournament.class).bindFromRequest().get();
+//  String tourTournamentname = tour.tournamentname;
+//  int tourParticipants = tour.participant_count;
+//  int tourTournamentgameID = tour.tournamentgameID;
+//  int tourTournamentcreator = tour.tournamentcreator;
+//      
+// 
 //
-//	public static Result addFacebookUser() {
-//		Connection conn = null;
-//		PreparedStatement preparedStatement;
-//		
-//		JsonNode json = request().body().asJson();
-//		
-//		String username = json.findPath("username").textValue();
-//		
-//		String id = json.findPath("id").textValue();
-//		long idLong = Long.parseLong(id);
-//		
-//		String name = json.findPath("name").textValue();
-//
-//		String email = json.findPath("email").textValue();
-//	
-//		try {
-//			
-//			conn = DB.getConnection();
-//			String insertIntoDatabase = "INSERT INTO FacebookUser (USERNAME, USERID, NAME, EMAIL) VALUES(?,?,?,?)";
-//			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-//			
-//			preparedStatement.setString(1, username);
-//			preparedStatement.setLong(2, idLong);
-//			preparedStatement.setString(3, name);
-//			preparedStatement.setString(4, email);
-//			preparedStatement.executeUpdate();
-//			
-//			session("connected", username);
-//			return redirect(routes.Application.mainMethod());
+//  try {
+//   
+//   conn = DB.getConnection();
+//   String insertIntoDatabase = "INSERT INTO ETournament (tournamentname, participant_count, tournamentgameID, tournamentcreator) VALUES(?,?,?,?)";
+//   preparedStatement = conn.prepareStatement(insertIntoDatabase);
+//   preparedStatement.setString(1, tournamentname);
+//   preparedStatement.setint(2, participant_count);
+//   preparedStatement.setint(3, tournamentgameID);
+//   preparedStatement.setint(4, tournamentcreator);
+//   preparedStatement.executeUpdate();
+//   session("connected", tourTournamentname);
+//   return redirect(routes.Application.mainMethod());
 //			
 //		} 	catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
 //		    return badRequest(LoginUserPage

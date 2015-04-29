@@ -31,7 +31,7 @@
 
 @media all and (min-width: 50em){
     .ui-page{
-        background: url("../images/main.jpg");
+        background: url("../images/main.jpg");ß
     }
     .ui-content{
         padding: 5% 5%;
@@ -51,6 +51,7 @@
         width: 80%;
 
     } 
+    /*Ta bort detta innehåll vis skapande av ny sida*/
     #img1{
         padding: 1em;
         float:right;

@@ -1,0 +1,67 @@
+        .ui-page{
+            background: url("../images/main.jpg");
+        }
+       .ui-content{
+            background: #151515;
+            padding: 5% 5%;
+            margin:0 auto;
+        }
+        .fullscreen{
+            max-height: 100%;
+            max-width: 100%;
+        }
+        .ui-page .ui-btn.my-btn  {
+        color      : white;
+        background : #FA7C04;
+
+
+        }​
+            #foot{
+            margin:0 auto;
+            background: #151515;
+            width: 100%;
+
+        } 
+            #header{
+            margin:0 auto;
+            background: #151515;
+            width: 100%;
+        }
+
+    @media all and (max-width: 36em){
+     
+        .ui-content{
+            background: #151515;
+        }
+        #foot{
+           
+            background: #151515;
+            width: 100%;
+
+        } 
+
+    }
+
+    @media all and (min-width: 50em){
+        .ui-page{
+            background: url("../images/main.jpg");
+
+        }
+        .ui-content{
+            padding: 5% 5%;
+            margin:0 auto;
+            width:40%;
+            background: #151515;
+
+        }
+        #header{
+            margin:0 auto;
+            background: #151515;
+            width: 50%;
+        }
+        #foot{
+            margin:0 auto;
+            background: #151515;
+            width: 50%;
+
+        } 

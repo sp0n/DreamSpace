@@ -1,4 +1,26 @@
 
+   .ui-content{
+        background: #151515;
+        padding: 5% 5%;
+        margin:0 auto;
+    }
+    .fullscreen{
+        max-height: 100%;
+        max-width: 100%;
+    }
+    .ui-page .ui-btn.my-btn  {
+    color      : white;
+    background : #FA7C04;
+
+
+    }​
+        #foot{
+        margin:0 auto;
+        background: #303030;
+        width: 100%;
+
+    } 
+
 @media all and (max-width: 36em){
  
     .ui-content{
@@ -18,19 +40,14 @@
         background: #151515;
 
     }
-    #divIframe{
-        overflow: hidden; 
-        margin: 0 auto; 
-        max-width: 700px;
-    }
     #header{
         margin:0 auto;
         background: #151515;
         width: 80%;
     }
-    #footer{
+    #foot{
         margin:0 auto;
-        background: #151515;
+        background: #303030;
         width: 80%;
 
     } 
@@ -57,18 +74,4 @@
     }
 
 }
-    .ui-content{
-        background: #151515;
-        padding: 5% 5%;
-        margin:0 auto;
-    }
-    .fullscreen{
-        max-height: 100%;
-        max-width: 100%;
-    }
-    .ui-page .ui-btn.my-btn  {
-    color      : white;
-    background : #FA7C04;
-
-
-    }​
+ 

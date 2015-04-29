@@ -60,4 +60,9 @@ public class Application extends Controller {
 		return redirect(routes.Application.loginUserPage());
 	}
 
+	public static Result packlist() {
+		return ok(Packlist.render("test"));
+	}
+ 
+
 }

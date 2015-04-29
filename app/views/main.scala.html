@@ -22,7 +22,7 @@
     <body>
          
 
-	
+
         <div data-role="page" data-theme="b" class="header-google">   
 
                 <div data-role="header" data-position = "fixed">
@@ -114,9 +114,14 @@ Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maie
             <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
               
                      <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
-                     <a href="#" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
+                     <a href="#/packlist" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
                      <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
                      <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
+                     <script>
+                     $('#/packlist').click(function() {
+                             window.location='/packlist'; });
+                     </script>
+
                     <button id="button1">Logout</button>
                     <script>
                         $('#button1').click(function() {

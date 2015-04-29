@@ -1,6 +1,24 @@
 package models;
 
+import java.util.*;
 
-public class Tournament {
+import javax.persistence.*;
 
+import play.data.validation.*;
+import play.db.ebean.Model;
+
+@Entity
+public class Tournament extends Model{
+
+@Id @Constraints.Required
+public String tournamentname;
+ 
+@Constraints.Required
+public int participant_count;
+
+@Constraints.Required 
+public int tournamentgameID;
+
+@Constraints.Required
+public int tournamentcreator;
 }

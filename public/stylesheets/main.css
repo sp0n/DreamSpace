@@ -1,5 +1,6 @@
 
-   .ui-content{
+   
+   .content{
         background: #151515;
         padding: 5% 5%;
         margin:0 auto;
@@ -8,18 +9,24 @@
         max-height: 100%;
         max-width: 100%;
     }
-    .ui-page .ui-btn.my-btn  {
+    /*Färgen för alla knappar alla skärmar*/
+    .ui-page .ui-btn  {
     color      : white;
     background : #FA7C04;
 
 
     }​
-        #foot{
-        margin:0 auto;
-        background: #303030;
-        width: 100%;
-
-    } 
+    .slide-menu{ 
+        max-width:75%;
+    }
+    /*Färgen för header alla skärmar*/
+    .ui-page .ui-header {
+        background:#151515;
+    }
+    /*Färgen för footer alla skärmar*/
+    .ui-page .ui-footer {
+        background:#151515;
+    }
 
 @media all and (max-width: 36em){
  
@@ -30,28 +37,26 @@
 }
 
 @media all and (min-width: 50em){
-    .ui-page{
+    .page{
         background: url("../images/main.jpg");ß
     }
-    .ui-content{
+    .content{
         padding: 5% 5%;
         margin:0 auto;
         width:70%;
         background: #151515;
 
     }
-    #header{
+    .head{
         margin:0 auto;
-        background: #151515;
         width: 80%;
     }
     #foot{
         margin:0 auto;
-        background: #303030;
         width: 80%;
 
     } 
-    /*Ta bort detta innehåll vis skapande av ny sida*/
+    /*Ta bort detta innehåll vid skapande av ny sida*/
     #img1{
         padding: 1em;
         float:right;

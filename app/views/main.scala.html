@@ -12,10 +12,12 @@
         <!-- JQuery Mobile -->
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
+        <!-- Stylsheet main and images -->
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
+        <!-- Javascripts -->
         <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
 
         <!-- Responsive menu -->
@@ -28,11 +30,11 @@
     </head>
     <body>
          
-        <div data-role="page" data-theme="b" id = "page"  >   
-            <div data-role="header" id = "header">
+        <div data-role="page" data-theme="b" class = "page"  >   
+            <div data-role="header" class = "head">
                 @message
-                <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1>
-                <div class="rmm" id="menu" >
+                <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1>
+                <div class="rmm">
                     <ul>
                         <li><a href='#home'>Home</a></li>
                         <li><a href='#news'>News</a></li>
@@ -42,7 +44,9 @@
                     </ul>
                 </div>    
             </div>
-            <div data-role="content">        
+            <div data-role="content" class = "content">
+
+<!--Ta bort detta vid användning och placera nytt inehåll i content  -->
                 <h1 align="center">News feed</h1>
                  Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.<h2><img src="@routes.Assets.at("images/e2.png")" class = "fullscreen" id = "img1"></h2>
 
@@ -72,13 +76,12 @@
                 Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua     conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.
 
                 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
-            </p>
-         
+            </p>    
             </div>
 
-          
+            
                 <footer class="footer-basic-centered" id = "foot">
-                    <p class="footer-company-motto">Dreamspace</p>
+                    <p class="footer-company-motto">Life is short play more</p>
                     <p class="footer-links">
                         <a href="#">Home</a>
                         ·
@@ -89,10 +92,9 @@
                         <a href="#">Info</a>
                     </p>
                     <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
-
                 </footer>
-
-            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
+            
+            <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
               
                      <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
                      <a href="#" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>

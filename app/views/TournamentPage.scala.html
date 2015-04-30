@@ -25,121 +25,84 @@
     
     
     <script>
-$(function() {
-    $("#generate").click(function() {
     
+
+$(function() {
+    
+    generateBracket($('#amount').val());
+    
+    var data;
+    
+    function saveFn(data) {
+        
+    }
+    
+    function generateBracket(playerAmount) {
+    
+    var teamData = {
+    teams : [] 
+    };
+    
+    playerAmount = playerAmount /2
+    
+    var j = 1;
+    for (i = 0; i < playerAmount; i++) { 
+    teamData.teams[i] = ["Team " + j, "Team " + ++j];
+    j++;
+    }
+    
+    var container = $('#bracket')
+    container.bracket({
+      init: teamData,
+      save: saveFn
+    })
+    
+    $('.tools').remove();
+  
+    data = container.bracket('data') ;
+ 
+    }
+    
+    $("#amount").change(function() {
+   
     var players = Number($('#amount').val());
     
     switch(players) {
     case 4:
-            
-          
- 
-/* Called whenever bracket is modified
- *
- * data:     changed bracket object in format given to init
- * userData: optional data given when bracket is created.
- */
-function saveFn(data) {
+    generateBracket(4);
+        break;
+    case 8:
+    generateBracket(8);
+        break;
+    case 16:
+    generateBracket(16);
+        break;
+    case 32:
+    generateBracket(32);
+        break;
+    
+    }
+    
+    
+});
+
+
+
+$("#create").click(function() {
+    
       $.ajax({
             url: "/savetournament",
             type: 'POST',
             contentType:'application/json',
-            data: JSON.stringify(data),
+            data: JSON.stringify({ tournamentInfo: data, name :  $('#fname').val(), amount: $('#amount').val() }),
             dataType : 'html',
 
 });
- }
- 
-$(function() {
-    
-    var container = $('#bracket')
-    container.bracket({
-      init: teams4,
-      save: saveFn,
-      userData: "http://myapi"})
-    $('.tools').remove();
-    /* You can also inquiry the current data */
-    var data = container.bracket('data')
-    
-  })
-  
-  
-        break;
-    case 8:
-       
-            $('#bracket').bracket({ init: teams8});
-        break;
-    case 16:
-    
-        break;
-    case 32:
-        
-        break;
-    case 64:
-        
-        break;
-   
-        
-       
-    }
-    
-    
 });
 });
 
-var teams4 = {
-    teams : [
-      ["Team 1", "Team 2"], 
-      ["Team 3", "Team 4"] 
-    
-    ] 
-  };
- 
-var teams8 = {
-    teams : [
-      ["Team 1", "Team 2"], 
-      ["Team 3", "Team 4"],  
-      ["Team 5", "Team 6"], 
-      ["Team 7", "Team 8"],  
-    ]
-  };
-  
-var teams16 = {
-    teams : [
-      ["Team 1", "Team 2"], 
-      ["Team 3", "Team 4"],  
-  
-    ] 
-  };
-  
-var teams32 = {
-    teams : [
-      ["Team 1", "Team 2"], 
-      ["Team 3", "Team 4"],  
-  
-    ]
-  };
-  
-var teams64 = {
-    teams : [
-      ["Team 1", "Team 2"], 
-      ["Team 3", "Team 4"],  
-  
-    ]
-  };
- 
- 
- function limitTextareaLine(e) {
-    if(e.keyCode == 13 && $(this).val().split("\n").length >= $(this).attr('rows')) { 
-        return false;
-    }
-}
 
-$(function() {
-  $('#players').keydown(limitTextareaLine);
 
-});
 
 
         
@@ -172,22 +135,21 @@ $(function() {
            
            
             <h1 align="center">Create your tournament</h1>
+            You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.
                <div id='bracket'></div>
                 <div id='bracketForm'>
                 <form name="bracketGenerate" >
-                Name: <input type="text" name="fname">
+                Name of your tournament: <input type="text" name="fname" id="fname">
                 Amount of players: 
         <select id="amount">
             <option value="4">4</option>
             <option value="8">8</option>
             <option value="16">16</option>
             <option value="32">32</option>
-            <option value="64">64</option>
         </select> 
         
-        Input players separated by a line break: <textarea id="players" name="players" rows="4" cols="4" class="players"></textarea>
-        
-        <input type="button" value="Submit" id="generate">
+       
+        <input type="button" value="Create" id="create">
         
         
     </form>

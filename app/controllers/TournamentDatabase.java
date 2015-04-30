@@ -15,46 +15,39 @@ import play.db.*;
 
 public class TournamentDatabase extends Controller {
 	
-//	public static Result addSpike(){
-//		JsonNode json = request().body().asJson();
-//		JsonNode jsonparent = json.findParent("teams");
-////		JsonNode jsonparent2 = jsonparent.findParent("0");
-//		JsonNode nameDirty = jsonparent.get(0);
-//		
-////		jsonparent2.get("0");
-////		if(jsonparent2.isContainerNode()){
-////		return ok("true");
-////		}
-////		else
-////////		String tournamentData = json.findPath("teams").textValue();
-////		
-//		
-//		return ok(json.toString()  + "");
-//		
-//	}
 	
 	
-	public static Result addSpike(){
+	public static Result addTournament(){
 		
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
 		JsonNode json = request().body().asJson();
-		String jsonString = json.toString();
-		String currentUser = session("connected");
+		
+		JsonNode jsonparent = json.findParent("tournamentInfo");
+		String tournamentData = jsonparent.toString();
+		String dataOnly = tournamentData.substring(tournamentData.lastIndexOf(":"));
+        String tournamentName = json.findPath("name").textValue();
+        String tournamentAmount= json.findPath("amount").textValue();
+        String currentUser = session("connected");
 		 try {
 		
-			 conn = DB.getConnection();
-			   String insertIntoDatabase = "INSERT INTO TournamentTest (admin, tournamentData, teamAmount) VALUES(?,?,?)";
-			   preparedStatement = conn.prepareStatement(insertIntoDatabase);
-		
-				preparedStatement.setString(1,currentUser);
-				preparedStatement.setString(2,jsonString);
-				preparedStatement.setInt(3, 5);
-				
-					preparedStatement.executeUpdate();
-					return redirect(routes.Application.mainMethod());
-		 } 	catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
+			conn = DB.getConnection();
+    
+             int teamAmount = Integer.parseInt(tournamentAmount);
+            String insertIntoDatabase = "INSERT INTO ETournament (admin, tournamentData, tournamentName, teamAmount) VALUES(?,?,?,?)";
+            preparedStatement = conn.prepareStatement(insertIntoDatabase);
+  
+            preparedStatement.setString(1,currentUser);
+            preparedStatement.setString(2,tournamentData);
+            preparedStatement.setString(3,tournamentName);
+            preparedStatement.setInt(4, teamAmount);
+    
+                preparedStatement.executeUpdate();
+                return redirect(routes.Application.mainMethod());
+		    } 	catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
 			    return badRequest(ice.toString()); 
+		    } catch (NumberFormatException nfe){
+                return 	badRequest(nfe.toString()); 	    
 			} catch (SQLException se) {
 	            // Handle sql errors
 				return internalServerError(se.toString());
@@ -77,47 +70,6 @@ public class TournamentDatabase extends Controller {
 			} //end try
 	}
 	
-    public static Result addTournament() {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-            
- 
-
-  try {
-   
-   conn = DB.getConnection();
-   String insertIntoDatabase = "INSERT INTO ETournament (tournamentname, participant_count, tournamentgameID, tournamentcreator) VALUES(?,?,?,?)";
-   preparedStatement = conn.prepareStatement(insertIntoDatabase);
-
-   
-   preparedStatement.executeUpdate();
-   return redirect(routes.Application.mainMethod());
-			
-		} 	catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice){
-		    return badRequest(LoginUserPage
-					.render("User with that name already exists")); 
-		} catch (SQLException se) {
-            // Handle sql errors
-			return internalServerError(se.toString());
-		} catch (Exception e) {
-			// Handle errors for Class.forName
-			return internalServerError(e.toString());
-		} finally {
-			 //finally block used to close resources
-//			try {
-//				if (preparedStatement != null)
-//					conn.close();
-//			} catch (SQLException se) {
-//			} //do nothing
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				return internalServerError(se.toString());
-			} //end finally try
-		} //end try
-
-	}
 	
 }
 	

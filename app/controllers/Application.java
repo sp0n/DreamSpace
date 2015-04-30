@@ -85,5 +85,15 @@ public class Application extends Controller {
 		session().clear();
 		return redirect(routes.Application.loginUserPage());
 	}
+	
+	public static Result showTournament(Integer id) {
+		String user = session("connected");
+		if (user != null) {
+			return ok(ShowTournament.render(TournamentDatabase.getTournament(id)));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
 
 }

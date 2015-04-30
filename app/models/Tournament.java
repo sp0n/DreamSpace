@@ -17,8 +17,8 @@ public String tournamentname;
 public int participant_count;
 
 @Constraints.Required 
-public int tournamentgameID;
+public String tournamentdata;
 
 @Constraints.Required
-public int tournamentcreator;
+public String tournamentcreator;
 }

@@ -44,4 +44,6 @@ GET /tournament controllers.Application.tournament()
 
 POST /savetournament controllers.TournamentDatabase.addTournament()
 
+GET  /showtournament/:id           controllers.Application.showTournament(id: Integer)
+
 

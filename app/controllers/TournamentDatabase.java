@@ -1,9 +1,11 @@
 package controllers;
+import models.*;
 
 import java.security.SecureRandom;
 import java.sql.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import views.html.*;
 import models.FacebookUser;
@@ -11,11 +13,58 @@ import play.data.Form;
 import play.db.DB;
 import play.mvc.*;
 import play.db.*;
+import play.libs.Json;
 
 
 public class TournamentDatabase extends Controller {
 	
-	
+		public static JsonNode getTournament(Integer id) {
+		
+	    Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		
+	    Tournament t = new Tournament();
+	    
+    	try {
+		    
+		    conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM ETournament WHERE tournamentID=?;";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setInt(1, id);
+			
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.isBeforeFirst()) {
+				rs.next();
+				t.tournamentname = rs.getString("tournamentName");
+				t.participant_count = rs.getInt("teamAmount");
+				t.tournamentcreator = rs.getString("admin");
+				t.tournamentdata = rs.getString("tournamentData");
+				
+			    
+		    }
+		    
+			if (t.tournamentdata == null){
+			    return null;
+			}
+			JsonNode tournamentJson = Json.toJson(t);
+			return tournamentJson;
+			
+		} catch (SQLException se) {
+			return null;
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return null;
+		} finally {
+			// finally block used to close resources
+			try {
+				if (preparedStatement != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+		}
+
+	}
 	
 	public static Result addTournament(){
 		

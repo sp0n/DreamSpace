@@ -26,12 +26,15 @@
 
         <!-- Responsive footer -->
         <link rel="stylesheet" href = "@routes.Assets.at("stylesheets/footer/footer-basic-centered.css")">
+
+        
+
       
     </head>
     <body>
          
-        <div data-role="page" data-theme="b" class = "page"  >   
-            <div data-role="header" class = "head">
+        <div data-role="page" data-theme="b" id = "main" class = "page"  >   
+            <div data-role="header" class = "header">
                 @message
                 <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1>
                 <div class="rmm">
@@ -79,7 +82,7 @@
             </p>    
             </div>
 
-            
+            <div data-role = "footer" class = "footer">
                 <footer class="footer-basic-centered" id = "foot">
                     <p class="footer-company-motto">Life is short play more</p>
                     <p class="footer-links">
@@ -93,6 +96,7 @@
                     </p>
                     <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
                 </footer>
+            </div>
             
             <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
               

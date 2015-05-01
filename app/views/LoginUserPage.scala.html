@@ -4,6 +4,7 @@
 
 <html>
     <head>
+
        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>DreamSpace</title>
@@ -22,11 +23,11 @@
     <body>
  
   <div data-role="page" id = "login" data-theme="b">
-    <div data-role="header" id = "header"> 
+    <div data-role="header" class = "header"> 
        <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
                       </div> 
                       
-		  <div data-role = "content" >
+		  <div data-role = "content" class = "content" >
 		
           <h1 >Log in</h1>
             	<form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
@@ -83,7 +84,7 @@ function isBlank(elementID){
 }
 </script>	        
 </div>
-<div data-role="footer" id = "foot">  
+<div data-role="footer" class = "footer">  
 <h4>© 2015 DREAMSPACE AB</h4>
 </div>
 </div>        

@@ -1,5 +1,7 @@
 
-   
+    .ui-page{
+        background: url("../images/main.jpg");
+    }
    .content{
         background: #151515;
         padding: 5% 5%;
@@ -28,6 +30,7 @@
         background:#151515;
     }
 
+
 @media all and (max-width: 36em){
  
     .ui-content{
@@ -47,11 +50,12 @@
         background: #151515;
 
     }
-    .head{
+    .header{
         margin:0 auto;
         width: 80%;
     }
-    #foot{
+
+    .footer {
         margin:0 auto;
         width: 80%;
 

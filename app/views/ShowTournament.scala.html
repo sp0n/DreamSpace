@@ -1,5 +1,4 @@
-@(tournament: com.fasterxml.jackson.databind.JsonNode)
-@import play.libs.Json
+@(tournament: Tournament)
 
 <!DOCTYPE html>
 
@@ -68,8 +67,8 @@
         <div data-role="content" >   
             </ul>
             <p>
-            <h1 align="center">News feed</h1>
-            <div id="test"></div>
+            <h1 align="center">This is not your tournament sir</h1>
+            <div id="bracket"></div>
 
 
         </div>
@@ -97,21 +96,22 @@
                     <button id="button1">Logout</button>
                     
                     <script>
-                    var obj = @tournament;
                     
-                    
-                    
+                    var a = @Html(tournament.tournamentdata)
+
                     $(function() {
-                      
-                        $('#test').bracket({
-                             init: data /* data to initialize the bracket with */ 
-                            
+                        
+                      var container = $('#bracket')
+                        container.bracket({
+                        init: a,
+                        
+                        
                         })
                         
-                     
-                       
-                    
+                         $('.tools').remove();
                     });
+                    
+                   
                     
                     
                     

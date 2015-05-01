@@ -21,4 +21,6 @@ public String tournamentdata;
 
 @Constraints.Required
 public String tournamentcreator;
+
+public int tournamentID;
 }

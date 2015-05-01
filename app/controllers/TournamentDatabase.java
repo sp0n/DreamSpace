@@ -264,7 +264,7 @@ public class TournamentDatabase extends Controller {
 			conn = DB.getConnection();
 
 			int teamAmount = Integer.parseInt(tournamentAmount);
-			String insertIntoDatabase = "UPDATE STATEMENT HERE KENY PLZ";
+			String insertIntoDatabase = "UPDATE ETournament SET admin=?, tournamentData=?, tournamentName=?, teamAmount=? WHERE tournamentID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, currentUser);

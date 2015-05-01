@@ -102,12 +102,7 @@
    		 $("#warning").html('Tournament Name is too short! Please enter a minimum of 4 characters');
    		errorInField()
             return;
-   	 }
-   	 
-   if(/[^a-zåäöA-ZÅÄÖ0-9_]/.test( $('#fname').val())){
-   	 $("#warning").html('Tournament Name contains invalid characters! Please only use letters, numbers and _');
-   		errorInField()
-   }else{
+   	 }else{
        $("#warning").html("Tournament Name is okay!");
 	   fieldOkay()
 	   

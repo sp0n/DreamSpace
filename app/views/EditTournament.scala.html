@@ -70,7 +70,61 @@
             <h1 align="center">Edit your tournament</h1>
             <div id="bracket"></div>
 
+                    <script>
+                    var data;
+                    var a = @Html(tournament.tournamentdata)
+                    
 
+                    $(function() {
+                        
+                      var container = $('#bracket')
+                        container.bracket({
+                        init: a,
+                        save: saveFn
+                        
+                        })
+                        
+                         $('.tools').remove();
+                         data = container.bracket('data');
+                    });
+                    
+                    function saveFn(data) {
+        
+                      }
+                    
+                    $("#save").click(function() {
+                        var teams = data.teams
+                        var results = data.results
+
+                          $.ajax({
+                                url: "/savetournament",
+                                type: 'POST',
+                                contentType:'application/json',
+                                data: JSON.stringify({teams: teams, results: results }),
+                                dataType : 'html',
+                                success: function(){
+                                    window.location.replace("/tournament");
+                                }
+                            });
+                  
+                            });
+                    
+                    
+                        $('#button1').click(function() {
+                             FB.getLoginStatus(function(response) {
+                                 if (response.status === 'connected') {
+                                FB.logout(function(response) {
+                        	        window.location='/logout';
+                        	    });
+                                 } else { 
+                                     window.location='/logout';
+                                 }
+                            });
+                        });
+                             
+                       
+                    </script>
+				<input type="button" value="Save Changes" id="save">
         </div>
             <div data-role="footer">  
 
@@ -95,45 +149,7 @@
                      <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
                     <button id="button1">Logout</button>
                     
-                    <script>
-                    
-                    var a = @Html(tournament.tournamentdata)
-                    
-
-                    $(function() {
-                        
-                      var container = $('#bracket')
-                        container.bracket({
-                        init: a,
-                        save: saveFn
-                        
-                        })
-                        
-                         $('.tools').remove();
-                         data = container.bracket('data');
-                    });
-                    
-                    function saveFn(data) {
-        
-                      }
-              
-                    
-                     
-                        $('#button1').click(function() {
-                             FB.getLoginStatus(function(response) {
-                                 if (response.status === 'connected') {
-                                FB.logout(function(response) {
-                        	        window.location='/logout';
-                        	    });
-                                 } else { 
-                                     window.location='/logout';
-                                 }
-                            });
-                        });
-                             
-                       
-                    </script>
-
+				
             </div>
 
         </div>

@@ -69,23 +69,54 @@
             <p>
             <h1 align="center">Edit your tournament</h1>
             <div id="bracket"></div>
+             <div id='bracketForm'>
+                <form name="bracketEdit" >
+                Name of your tournament: <input type="text" name="fname" id="fname">
+                        Amount of players: 
+                            <select id="amount">
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
+                            </select> 
+                
+               
+                <input type="button" value="Save changes" id="save">
+                    <p id="warning"></p>
+                
+            </form>
+            
+            </div>
 
                     <script>
                     var data;
-                    var a = @Html(tournament.tournamentdata)
+                    var a = @Html(tournament.tournamentdata);
+                    var tid = @tournament.tournamentID;
+                    var name = "@tournament.tournamentname";
+                    var tamount = @tournament.participant_count;
+                    var amount = tamount.toString(); 
+                    var container = $('#bracket');
                     
-
+                    
+                    $(document).on("pageload",function(){
+                     $("#amount").selectmenu('refresh');
+                    });
+                    
+                    
                     $(function() {
                         
-                      var container = $('#bracket')
+                        $("#fname").val(name);
+                        $("#amount").val(amount);
+                       
+                      
                         container.bracket({
                         init: a,
                         save: saveFn
                         
-                        })
+                        });
                         
                          $('.tools').remove();
-                         data = container.bracket('data');
+                        
                     });
                     
                     function saveFn(data) {
@@ -93,14 +124,21 @@
                       }
                     
                     $("#save").click(function() {
-                        var teams = data.teams
-                        var results = data.results
+                        
+                        name = $("#fname").val();
+                        amount = $("#amount").val();
+                        data = container.bracket('data');
+                        var teams = data.teams;
+                        var results = data.results;
+                        var id = tid.toString();
+                      
+                        
 
                           $.ajax({
-                                url: "/savetournament",
+                                url: "/edittournament",
                                 type: 'POST',
                                 contentType:'application/json',
-                                data: JSON.stringify({teams: teams, results: results }),
+                                data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
                                 dataType : 'html',
                                 success: function(){
                                     window.location.replace("/tournament");
@@ -124,7 +162,7 @@
                              
                        
                     </script>
-				<input type="button" value="Save Changes" id="save">
+				
         </div>
             <div data-role="footer">  
 

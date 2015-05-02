@@ -244,11 +244,7 @@ public class TournamentDatabase extends Controller {
 		PreparedStatement preparedStatement = null;
 		JsonNode json = request().body().asJson();
 
-		//JsonNode jsonparent = json.findParent("tournamentInfo");
-		//String tournamentData = jsonparent.toString();
-		//String dataOnly = tournamentData.substring(tournamentData.lastIndexOf(":"));
-		
-		String tournamentID = json.findPath("id").textValue();
+	    String tournamentID = json.findPath("id").textValue();
 		String tournamentName = json.findPath("name").textValue();
 		String tournamentAmount = json.findPath("amount").textValue();
 		JsonNode tournamentTeams = json.findPath("teams");
@@ -259,21 +255,27 @@ public class TournamentDatabase extends Controller {
 	    String tournamentData = "{teams:" + tournamentData1 + ",results:" + tournamentData2 + "}";
 	    
 		String currentUser = session("connected");
+		
 		try {
-
+            if (tournamentID == null || tournamentID.isEmpty()){
+                throw new SQLException();
+            }
 			conn = DB.getConnection();
-
-			int teamAmount = Integer.parseInt(tournamentAmount);
-			String insertIntoDatabase = "UPDATE ETournament SET admin=?, tournamentData=?, tournamentName=?, teamAmount=? WHERE tournamentID=?";
+            
+            int parsedID = Integer.parseInt(tournamentID);
+		    int teamAmount = Integer.parseInt(tournamentAmount);
+            
+			String insertIntoDatabase = "UPDATE ETournament SET tournamentData=?, tournamentName=?, teamAmount=? WHERE tournamentID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
-			preparedStatement.setString(1, currentUser);
-			preparedStatement.setString(2, tournamentData);
-			preparedStatement.setString(3, tournamentName);
-			preparedStatement.setInt(4, teamAmount);
+		
+			preparedStatement.setString(1, tournamentData);
+			preparedStatement.setString(2, tournamentName);
+			preparedStatement.setInt(3, teamAmount);
+			preparedStatement.setInt(4, parsedID);
 
 			preparedStatement.executeUpdate();
-			return redirect(routes.Application.mainMethod());
+			return ok();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 			return badRequest(ice.toString());
 		} catch (NumberFormatException nfe) {

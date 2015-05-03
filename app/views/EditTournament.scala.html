@@ -228,7 +228,19 @@
                      <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
                      <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
                     <button id="button1">Logout</button>
-                    
+                    <script>
+                        $('#button1').click(function() {
+                             FB.getLoginStatus(function(response) {
+                                 if (response.status === 'connected') {
+                                FB.logout(function(response) {
+                        	        window.location='/logout';
+                        	    });
+                                 } else { 
+                                     window.location='/logout';
+                                 }
+                            });
+                        });
+                    </script>
 				
             </div>
 

@@ -33,6 +33,12 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
+	
+	public static Result facebookExistLogin(){
+	
+		return mainMethod();
+	}
+	
 
 	public static Result newUserPage() {
 		String currentUser = session("connected");
@@ -42,6 +48,16 @@ public class Application extends Controller {
 		}
 
 		return ok(NewUserPage.render(""));
+	}
+	
+	public static Result chooseUsername() {
+		String currentUser = session("connected");
+		if (currentUser != null) {
+			return ok(main.render("You are already logged in as " + currentUser
+					+ " Please log out if you wish to create another account"));
+		}
+
+		return ok(ChooseUsername.render(""));
 	}
 
 	public static Result loginUserPage() {
@@ -59,5 +75,10 @@ public class Application extends Controller {
 		session().clear();
 		return redirect(routes.Application.loginUserPage());
 	}
+
+	public static Result packlist() {
+		return ok(Packlist.render("test"));
+	}
+ 
 
 }

@@ -28,14 +28,19 @@ public class UserDatabase extends Controller {
 		String nameDirty = json.findPath("username").textValue();
 		String nameOnly = nameDirty.substring(nameDirty.lastIndexOf("=") + 1);
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement preparedStatement = null;
 		String dbUser = null;
-		String sql = "SELECT * FROM `User` WHERE `username` = " + "'"
-				+ nameOnly + "'";
+	
 		try {
+
 			conn = DB.getConnection();
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM User u cross join FacebookUser fu where u.username =?or fu.username =? LIMIT 1";
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, nameOnly);
+			preparedStatement.setString(2, nameOnly);
+			
+			
+			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.isBeforeFirst()) {
 				rs.next();
 				dbUser = rs.getString("username");
@@ -49,7 +54,7 @@ public class UserDatabase extends Controller {
 		} finally {
 			// finally block used to close resources
 			try {
-				if (stmt != null)
+				if (preparedStatement != null)
 					conn.close();
 			} catch (SQLException se) {
 			}// do nothin

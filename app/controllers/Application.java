@@ -86,6 +86,7 @@ public class Application extends Controller {
 		return redirect(routes.Application.loginUserPage());
 	}
 
+
 	public static Result showTournament(Integer id) {
 		String user = session("connected");
 		if (user != null) {
@@ -101,5 +102,10 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
+
+	public static Result packlist() {
+		return ok(Packlist.render("test"));
+	}
+ 
 
 }

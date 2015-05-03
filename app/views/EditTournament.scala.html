@@ -96,35 +96,87 @@
                     var tamount = @tournament.participant_count;
                     var amount = tamount.toString(); 
                     var container = $('#bracket');
+                    var prevAmt;
                     
                     
                     $(document).on("pageload",function(){
-                     $("#amount").selectmenu('refresh');
+                    
+                     
                     });
                     
+                    $(document).on('click','.increment',function(){
+                        
+                        switch(amount) {
+                            case "4":
+                            amount = "8"; 
+                                break;
+                            case "8":
+                            amount = "16";
+                                break;
+                            case "16":
+                            amount = "32";
+                            $('.increment').remove();
+                                break;
+                            case "32":
+                                break;
+                            
+                        }
+                        
+                    });
+                    
+                   $(document).on('click','.decrement',function(){
+                        
+                        switch(amount) {
+                            case "4":
+                                break;
+                            case "8":
+                             $('.decrement').remove();
+                            amount = "4";
+                                break;
+                            case "16":
+                            amount = "8";
+                                break;
+                            case "32":
+                            amount = "16";
+                                break;
+                            
+                        }
+                    });
+                    
+                    $('#bracket').click(function() {
+                        
+                        $('.doubleElimination').remove();
+                        
+                       
+                        
+                    });
                     
                     $(function() {
                         
                         $("#fname").val(name);
                         $("#amount").val(amount);
-                       
-                      
+                        $("#amount").selectmenu('refresh');
+                        prevAmt = $('#amount').val();
+                        
                         container.bracket({
                         init: a,
                         save: saveFn
                         
                         });
                         
-                         $('.tools').remove();
+                        if (amount == "4"){
+                            $('.decrement').remove();
+                        }
                         
+                         $('.doubleElimination').remove();
+                     
                     });
                     
                     function saveFn(data) {
-        
-                      }
+                    }
                     
                     $("#save").click(function() {
-                        
+                            
                         name = $("#fname").val();
                         amount = $("#amount").val();
                         data = container.bracket('data');
@@ -133,8 +185,7 @@
                         var id = tid.toString();
                       
                         
-
-                          $.ajax({
+                        $.ajax({
                                 url: "/edittournament",
                                 type: 'POST',
                                 contentType:'application/json',
@@ -143,24 +194,24 @@
                                 success: function(){
                                     window.location.replace("/tournament");
                                 }
-                            });
-                  
-                            });
-                    
-                    
-                        $('#button1').click(function() {
-                             FB.getLoginStatus(function(response) {
-                                 if (response.status === 'connected') {
-                                FB.logout(function(response) {
-                        	        window.location='/logout';
-                        	    });
-                                 } else { 
-                                     window.location='/logout';
-                                 }
-                            });
                         });
-                             
-                       
+                  
+                    });
+                    
+                    
+                    $('#button1').click(function() {
+                         FB.getLoginStatus(function(response) {
+                             if (response.status === 'connected') {
+                            FB.logout(function(response) {
+                    	        window.location='/logout';
+                    	    });
+                             } else { 
+                                 window.location='/logout';
+                             }
+                        });
+                    });
+                    
+                    
                     </script>
 				
         </div>

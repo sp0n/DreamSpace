@@ -33,12 +33,11 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
-	
-	public static Result facebookExistLogin(){
-	
+
+	public static Result facebookExistLogin() {
+
 		return mainMethod();
 	}
-	
 
 	public static Result newUserPage() {
 		String currentUser = session("connected");
@@ -49,7 +48,7 @@ public class Application extends Controller {
 
 		return ok(NewUserPage.render(""));
 	}
-	
+
 	public static Result chooseUsername() {
 		String currentUser = session("connected");
 		if (currentUser != null) {
@@ -70,11 +69,12 @@ public class Application extends Controller {
 
 		return ok(LoginUserPage.render(""));
 	}
-	
+
 	public static Result tournament() {
 		String user = session("connected");
 		if (user != null) {
-			return ok(CreateTournamentPage.render("You are logged in as " + user));
+			return ok(CreateTournamentPage.render("You are logged in as "
+					+ user));
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));
@@ -85,22 +85,21 @@ public class Application extends Controller {
 		session().clear();
 		return redirect(routes.Application.loginUserPage());
 	}
-	
+
 	public static Result showTournament(Integer id) {
 		String user = session("connected");
 		if (user != null) {
-		    if (user.equals(TournamentDatabase.getTournamentAdmin(id).tournamentcreator)){
-			return ok(EditTournament.render(TournamentDatabase.getTournament(id)));
-		    } else {
-		    return ok(ShowTournament.render(TournamentDatabase.getTournament(id)));
-		    }
+			if (user.equals(TournamentDatabase.getTournamentAdmin(id).tournamentcreator)) {
+				return ok(EditTournament.render(TournamentDatabase
+						.getTournament(id)));
+			} else {
+				return ok(ShowTournament.render(TournamentDatabase
+						.getTournament(id)));
+			}
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));
 		}
 	}
-	
-	
-	
 
 }

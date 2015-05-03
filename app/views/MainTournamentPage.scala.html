@@ -8,18 +8,13 @@
         <meta charset="UTF-8">
         <title>DreamSpace</title>
 
-
         <!-- JQuery Mobile -->
        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
-
-        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
-        <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-        
-      
+
       <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -39,9 +34,6 @@
       
     </head>
     <body>
-         
-
- 
         <div data-role="page" data-theme="b" class="header-google">   
 
                 <div data-role="header" data-position = "fixed">
@@ -64,17 +56,14 @@
             <div id="weiner"></div>
     <ul> 
  @for(tournament <- tournament) {
-  <li><a href="/showtournament/@tournament.tournamentID">@{"Tournament Name: " + tournament.tournamentname +" Tournament Size: " +  tournament.participant_count }</a></li>
+  <li><a rel="external"  href="/showtournament/@tournament.tournamentID">@{"Tournament Name: " + tournament.tournamentname +" Tournament Size: " +  tournament.participant_count }</a></li>
  } 
  </ul>
-        
-       
         
            <div style="border-radius:10px;height:100px;width:1000px;" class="tournaments" id="message" >  </div>
            
             <script type="text/javascript">
-   
-  
+
             $(function() {
 
             });
@@ -82,22 +71,8 @@
             </script>
             
          <a href="/createtournament"><button>Create a new tournament</button></a>
-          
-            
-            
-            <!--  
-            
-            <div style="overflow: hidden; margin: 15px auto; max-width: 700px;">
-                <iframe scrolling="no" src="http://dreamhack.se/dhs15/" style="border: 0px none; margin-left: -20px; height: 8050px; margin-top: -370px; width: 850px;">
-                </iframe>
-              
-            </div>
-            -->
-
-
         </div>
             <div data-role="footer">  
-
 
                 <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
                      <a href="#" data-role="button" data-icon="star" id="footerB"class="my-btn">About</a>
@@ -120,9 +95,7 @@
                     <button id="button1">Logout</button>
                     
                     <script>
-                    
-                    
-                     
+
                         $('#button1').click(function() {
                              FB.getLoginStatus(function(response) {
                                  if (response.status === 'connected') {

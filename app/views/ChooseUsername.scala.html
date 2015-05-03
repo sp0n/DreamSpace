@@ -15,9 +15,28 @@
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/signup.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
+        
+        <script>
+        
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '850805461661221',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+		</script>
+        
     </head>
     <body>
-        <div data-role="page" id = "signup" data-theme="b">
+        <div data-role="page" id = "choosename" data-theme="b">
         
             <div data-role="header"> 
                 <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1> 
@@ -25,32 +44,17 @@
             
             <div data-role = "content">
             
-                <h1>Create new user</h1>
-                <form id ="signupform" action="@routes.UserDatabase.addUser()" method ="post" data-ajax="false">
+                <h1>Choose a username for you account</h1>
+
                 
                     <div data-role="fieldcontain"class="ui-hide-label">
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" value="" placeholder="Username"/>
                     </div>
                     
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Email" >Email:</label>
-                        <input type="email" name="email" id="email" value="" placeholder="Email"/>
-                    </div>
-                    
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Password" >Password:</label>
-                        <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                    </div>
-                    
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Confirm password" >Confirm password:</label>
-                        <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
-                    </div>
-           
                      <input type="submit" value="Create account" onclick="return validate()">
 
-                </form>
+              
                         <button onclick="window.location.href='/login'">Return to login</button>
                 <p id="warning">@message</p>
  
@@ -60,8 +64,7 @@
              var usernameOkay = true;
              $('#username').change(function() {
             	 if( $('#username').val().length <1){
-
-            		 $("#warning").html('Username is too short! Please enter a minimum of x characters!');
+            		 $("#warning").html('Username is too short! Please enter a minimum of x characters');
             		 $("#warning").css('color', 'red');
                      $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
                      $('#redcross').width(40);
@@ -70,7 +73,6 @@
                      return;
             	 }
             	 
-
             if(/[^a-zåäöA-ZÅÄÖ0-9_]/.test( $('#username').val())){
             	 $("#warning").html('Username contains invalid characters! Please only use letters, numbers and _');
         		 $("#warning").css('color', 'red');
@@ -80,6 +82,7 @@
                  usernameOkay = false;
                  return;
             }
+            
               var name = $('#username').serialize();
               var data = {"username" : name};
             $.ajax({
@@ -114,13 +117,14 @@
                 
             <script type="text/javascript">
             function validate() {
-            	
+                
                 var blnValid = true;
 				if(!usernameOkay)
 					{
 					blnValid = false;
 					document.getElementById("username").focus();
 					}
+					
                 if(isBlank("username"))
                 {
                     blnValid = false;
@@ -128,47 +132,30 @@
                     $("#warning").html('Username field cannot be blank!');
                     document.getElementById("username").focus();
                 }
-                if(blnValid)
-                {   
-                 if(isBlank("email"))
-                {
-                    blnValid = false;
-                    $("#warning").css('color', 'red');
-                    $("#warning").html('Email field cannot be blank!');
-                    document.getElementById("email").focus();
-                }
-                }
-                if(blnValid)
-                {   
-                 if(isBlank("password"))
-                {
-                    blnValid = false;
-                    $("#warning").css('color', 'red');
-                     $("#warning").html('Password field cannot be blank!');
-                    document.getElementById("password").focus();
-                }
-                }
-                if(blnValid)
-                {   
-                 if(isBlank("confirmPass"))
-                {
-                    blnValid = false;
-                    $("#warning").css('color', 'red');
-                    $("#warning").html('Confirm password field cannot be blank!');
-                    document.getElementById("confirmPass").focus();
-                }
-                }
                 
-                if(blnValid)
-                {   
-                 if (document.getElementById('password').value != document.getElementById('confirmPass').value){
-                     blnValid = false; 
-                     $("#warning").css('color', 'red');
-                    $("#warning").html('Passwords didnt match');
-                     document.getElementById("password").focus();
-                 }
+                if (blnValid == false){
+                    return blnValid;
+                } else {
+               FB.getLoginStatus(function(response) {
+               FB.api('/me', function(response) {
+                   
+               
+               var data = {"username":$("#username").val(), "id":response.id, "name":response.name,"email":response.email};
+                $.ajax({
+                url: '/addfacebookuser',
+                type: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify(data),
+                success: function(data){
+                    window.location = "/";
                 }
+                });
+                });
+                });
+                }
+               
                 return blnValid;
+                
             }
 
 
